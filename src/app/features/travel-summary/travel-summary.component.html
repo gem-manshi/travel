@@ -1,0 +1,447 @@
+<div *ngIf="config" style="padding: 20px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li
+        *ngFor="let breadCrumb of config.breadCrumbs; let last = last"
+        class="d-flex align-items-center"
+        [class.active]="last"
+      >
+        <a *ngIf="!last" [routerLink]="breadCrumb.link" class="crumb">
+          {{ breadCrumb.title }}
+        </a>
+        <span *ngIf="last">Travel Summary</span>
+        <i
+          *ngIf="!last"
+          class="bi bi-chevron-right mx-2 text-muted"
+          aria-hidden="true"
+        ></i>
+      </li>
+    </ol>
+  </nav>
+
+  <div class="form-title mb-3">
+    <h5 class="title">{{ config.title }}</h5>
+  </div>
+
+  <div class="card-css">
+    <div
+      class="card-header-css d-flex justify-content-between align-items-center"
+    >
+      <h5 class="card-title">Policy Summary</h5>
+      <div class="icons">
+        <button class="btn btn-light me-2 icon-css" (click)="editPolicy()">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-light me-2 icon-css" (click)="sharePolicy()">
+          <i class="bi bi-share"></i>
+        </button>
+        <button class="btn btn-light icon-css" (click)="downloadPolicy()">
+          <i class="bi bi-download"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="details-css">
+      <div class="mb-4 pt-3">
+        <h6 class="detail-title">Base Details</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Master Policy Cover Start Date</div>
+            <div class="detail-value">01/09/2025</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Master Policy Cover End Date</div>
+            <div class="detail-value">30/09/2025</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Duration</div>
+            <div class="detail-value">30 Days</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Plan</div>
+            <div class="detail-value">Comprehensive Plan</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Preposition</div>
+            <div class="detail-value">By Air</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Place of Origin</div>
+            <div class="detail-value">New Delhi (India)</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Place of Destination</div>
+            <div class="detail-value">London, United Kingdom</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Partner Application Number</div>
+            <div class="detail-value">PA-4521893</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Party Code</div>
+            <div class="detail-value">PTY-9021</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <h6 class="detail-title">Departure Details</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Journey Start from</div>
+            <div class="detail-value">IGI Airport, New Delhi (DEL)</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Journey Destination / Halt</div>
+            <div class="detail-value">Heathrow Airport, London (LHR)</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Date</div>
+            <div class="detail-value">01/09/2025</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Number</div>
+            <div class="detail-value">AI 111</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Name</div>
+            <div class="detail-value">Air India</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">PNR Number</div>
+            <div class="detail-value">X7Y9Z3</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <h6 class="detail-title">Return Journey</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Journey Start from</div>
+            <div class="detail-value">Heathrow Airport, London (LHR)</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Journey Destination / Halt</div>
+            <div class="detail-value">IGI Airport, New Delhi (DEL)</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Date</div>
+            <div class="detail-value">29/09/2025</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Number</div>
+            <div class="detail-value">AI 112</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Flight Name</div>
+            <div class="detail-value">Air India</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">PNR Number</div>
+            <div class="detail-value">Z4X9K2</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <h6 class="detail-title">Insured Details</h6>
+
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Risk Type</div>
+            <div class="detail-value">Family (1)</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Family Details 1</h6>
+
+        <h6 class="detail-title">Self Insured 1</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Employee / Unique ID</div>
+            <div class="detail-value">EMP4521</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">First Name</div>
+            <div class="detail-value">Rohan</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Last Name</div>
+            <div class="detail-value">Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Email ID</div>
+            <div class="detail-value">rohan.mehta&#64;gmail.com</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">15/08/1970</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Male</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Mobile Number</div>
+            <div class="detail-value">+91 9876543210</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Passport Number</div>
+            <div class="detail-value">N1234567</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">PAN Number</div>
+            <div class="detail-value">ACRPM1234F</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Pincode</div>
+            <div class="detail-value">110001</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 1</div>
+            <div class="detail-value">23, Green Park Main Road, Delhi</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 2</div>
+            <div class="detail-value">-</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 3</div>
+            <div class="detail-value">-</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Nominee Details</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Name</div>
+            <div class="detail-value">Ananya Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">20/11/1950</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Female</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Relationship with Insured Person</div>
+            <div class="detail-value">Mother</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="detail-label">Address</div>
+            <div class="detail-value">23, Green Park Main Road, Delhi</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Spouse Details 1</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Employee / Unique ID</div>
+            <div class="detail-value">EMP56789</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">First Name</div>
+            <div class="detail-value">Anita</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Last Name</div>
+            <div class="detail-value">Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Email ID</div>
+            <div class="detail-value">anita.mehta&#64;gmail.com</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">12/03/1971</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Female</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Mobile Number</div>
+            <div class="detail-value">+91 9876545430</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Passport Number</div>
+            <div class="detail-value">M1234567</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">PAN Number</div>
+            <div class="detail-value">ASDFP1234K</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Pincode</div>
+            <div class="detail-value">560001</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 1</div>
+            <div class="detail-value">45, MG Road, Bangalore</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 2</div>
+            <div class="detail-value">-</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 3</div>
+            <div class="detail-value">-</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Nominee Details</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Name</div>
+            <div class="detail-value">Rohit Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">10/08/1998</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Male</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Relationship with Insured Person</div>
+            <div class="detail-value">Son</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="detail-label">Address</div>
+            <div class="detail-value">45, MG Road, Bangalore</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Child Details 1</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Employee / Unique ID</div>
+            <div class="detail-value">EMP56790</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">First Name</div>
+            <div class="detail-value">Sahil</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Last Name</div>
+            <div class="detail-value">Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Email ID</div>
+            <div class="detail-value">sahil.mehta&#64;gmail.com</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">10/08/1991</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Male</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Mobile Number</div>
+            <div class="detail-value">+91 7523187527</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Passport Number</div>
+            <div class="detail-value">P9876543</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">PAN Number</div>
+            <div class="detail-value">BBDFP1234K</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Pincode</div>
+            <div class="detail-value">560001</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 1</div>
+            <div class="detail-value">45, MG Road, Bangalore</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 2</div>
+            <div class="detail-value">-</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Address 3</div>
+            <div class="detail-value">-</div>
+          </div>
+        </div>
+
+        <h6 class="detail-title">Nominee Details</h6>
+        <div class="row mx-md">
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Name</div>
+            <div class="detail-value">Anita Mehta</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Date of Birth</div>
+            <div class="detail-value">12/03/1971</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Gender</div>
+            <div class="detail-value">Female</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="detail-label">Relationship with Insured Person</div>
+            <div class="detail-value">Mother</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="detail-label">Address</div>
+            <div class="detail-value">45, MG Road, Bangalore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer
+    footer
+    class="sticky-bottom bg-white mt-4 d-flex flex-column align-items-start gap-3 mx-auto bg-white"
+    style="
+      z-index: 1050;
+      left: 150px;
+      background: #fff;
+      box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.08);
+    "
+  >
+    <div
+      class="container d-flex flex-wrap justify-content-between align-items-center"
+    >
+      <div class="d-flex flex-wrap gap-3 flex-grow-1" style="padding: 16px">
+        <button
+          class="btn btn-primary btn-md flex-grow-1"
+          type="button"
+          style="min-width: 150px; max-width: 230px"
+        >
+          Complete Transaction
+        </button>
+      </div>
+      <div
+        class="summary d-flex align-items-center justify-content-start flex-shrink-0 ml-auto"
+        style="margin-right: -12px"
+      >
+        <div class="d-flex flex-column">
+          <span class="text-h3-semibold pb-md mt-xxl mb-xl">Total Premium</span>
+          <a
+            class="text-primary mt-1 small text-decoration-underline"
+            style="margin: 0"
+          >
+            View Breakup
+          </a>
+        </div>
+        <div style="border-left: 3px solid #8cb8ff; height: 40px"></div>
+        <span
+          class="text-h3-semibold pb-md mt-xxl mb-xl"
+          style="margin-left: 0"
+        >
+          ₹ 12,54,200.70
+        </span>
+      </div>
+    </div>
+  </footer>
+</div>
