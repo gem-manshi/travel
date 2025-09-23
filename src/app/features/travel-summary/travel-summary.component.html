@@ -1,4 +1,4 @@
-<div *ngIf="config" style="padding: 20px">
+<div *ngIf="config" class="p-5">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li
@@ -398,50 +398,38 @@
       </div>
     </div>
   </div>
-
-  <footer
-    footer
-    class="sticky-bottom bg-white mt-4 d-flex flex-column align-items-start gap-3 mx-auto bg-white"
-    style="
-      z-index: 1050;
-      left: 150px;
-      background: #fff;
-      box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.08);
-    "
-  >
-    <div
-      class="container d-flex flex-wrap justify-content-between align-items-center"
-    >
-      <div class="d-flex flex-wrap gap-3 flex-grow-1" style="padding: 16px">
-        <button
-          class="btn btn-primary btn-md flex-grow-1"
-          type="button"
-          style="min-width: 150px; max-width: 230px"
-        >
-          Complete Transaction
-        </button>
-      </div>
-      <div
-        class="summary d-flex align-items-center justify-content-start flex-shrink-0 ml-auto"
-        style="margin-right: -12px"
-      >
-        <div class="d-flex flex-column">
-          <span class="text-h3-semibold pb-md mt-xxl mb-xl">Total Premium</span>
-          <a
-            class="text-primary mt-1 small text-decoration-underline"
-            style="margin: 0"
-          >
-            View Breakup
-          </a>
-        </div>
-        <div style="border-left: 3px solid #8cb8ff; height: 40px"></div>
-        <span
-          class="text-h3-semibold pb-md mt-xxl mb-xl"
-          style="margin-left: 0"
-        >
-          ₹ 12,54,200.70
-        </span>
-      </div>
-    </div>
-  </footer>
 </div>
+<footer footer class="sticky-bottom footer-css">
+  <div
+    class="containers d-flex flex-wrap justify-content-between align-items-center"
+  >
+    <div class="button-css">
+      <button
+        class="btn btn-primary btn-md flex-grow-1"
+        (click)="goToApp()"
+        type="button"
+      >
+        Complete Transaction
+      </button>
+    </div>
+
+    <div
+      class="summary d-flex align-items-center justify-content-start flex-shrink-0 ml-auto"
+      style="min-width: 250px"
+    >
+      <div class="d-flex flex-column">
+        <span class="text-h3-semibold pb-md mt-xxl mb-xl">Total Premium</span>
+        <a
+          class="text-primary mt-1 small text-decoration-underline"
+          style="margin: 0"
+        >
+          View Breakup
+        </a>
+      </div>
+      <div style="border-left: 3px solid #8cb8ff; height: 40px"></div>
+      <span class="text-h3-semibold pb-md mt-xxl mb-xl" style="margin-left: 0">
+        ₹ 12,54,200.70
+      </span>
+    </div>
+  </div>
+</footer>

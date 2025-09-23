@@ -83,3 +83,16 @@
   align-self: stretch;
   background: var(--Blue-Secondary, #e2ecfb);
 }
+.footer-css {
+  background: #fff;
+  box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+.button-css {
+  display: flex;
+  width: 200px;
+  padding: 16px 50px;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  align-self: stretch;
+}

@@ -35,4 +35,7 @@ export class TravelSummaryComponent {
   completeTransaction() {
     alert('Transaction completed!');
   }
+  goToApp() {
+    this.router.navigateByUrl('http://localhost:8902');
+  }
 }

@@ -100,7 +100,7 @@
 }
 .summary {
   display: flex;
-  padding: 8px 10px;
+  padding: 14px 40px;
   align-items: center;
   gap: 16px;
   height: 90px;
@@ -111,7 +111,7 @@
   margin-left: 65px;
 }
 .align-css {
-  margin-left: -270px;
+  margin-left: -272px;
 }
 .section-header-css {
   color: #131314;
@@ -120,4 +120,26 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+.footer-css {
+  background: #fff;
+  box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+.button-css {
+  display: flex;
+  width: 200px;
+  padding: 16px 50px;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
 }
