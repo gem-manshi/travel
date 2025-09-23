@@ -311,7 +311,6 @@
         {
           "type": "stepper",
           "name": "familyCount",
-          "label": "Family Count",
           "value": 1,
           "min": 0,
           "max": 10
@@ -319,7 +318,6 @@
         {
           "type": "stepper",
           "name": "individualCount",
-          "label": "Individual Count",
           "value": 0,
           "min": 0,
           "max": 10,
