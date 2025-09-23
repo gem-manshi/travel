@@ -11,6 +11,8 @@ import formConfigData from '../../shared/schema/form.config.json';
 import { Router, RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ViewBreakupComponent } from '@app/shared/common-components/view-breakup/view-breakup.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-travel-jounery',
@@ -30,6 +32,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   encapsulation: ViewEncapsulation.None,
 })
 export class TravelJouneryComponent implements OnInit {
+  bsModalRef?: BsModalRef;
   config: any = formConfigData;
   formConfig: any = formConfigData;
 
@@ -61,7 +64,10 @@ export class TravelJouneryComponent implements OnInit {
   selectedDate: Date | null = null;
   getPremiumClicked: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private modalService: BsModalService,
+  ) {}
 
   /**
    * ngOnInit is the first life cycle method of Angular
@@ -500,6 +506,26 @@ export class TravelJouneryComponent implements OnInit {
   goToPolicySummary() {
     this.router.navigate(['/travel-summary'], {
       // state: { formData: this.formGroup.value }
+    });
+  }
+
+  viewBreakup() {
+    const insuredDetails = this.config.sections.find(
+      (section: any) => section.type === 'insuredDetails',
+    );
+
+    const premiumSummary = insuredDetails?.modals?.premiumSummary;
+    console.log('section', premiumSummary);
+    if (!premiumSummary) {
+      console.error('Premium Summary config not found!');
+      return;
+    }
+
+    const initialState = { config: premiumSummary };
+
+    this.bsModalRef = this.modalService.show(ViewBreakupComponent, {
+      initialState,
+      class: 'modal-md',
     });
   }
 }

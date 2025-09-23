@@ -496,7 +496,22 @@
           "label": "Address",
           "placeholder": "Enter address"
         }
-      ]
+      ],
+      "modals": {
+        "premiumSummary": {
+          "title": "Premium Summary",
+          "items": [
+            { "label": "Premium Excluding Terrorism", "value": "₹ 4,000.00" },
+            { "label": "Terrorism Premium", "value": "₹ 115.50" },
+            { "label": "Gross Premium", "value": "₹ 4,115.50" },
+            { "label": "IGST 18%:", "value": "₹ 740.79" }
+          ],
+          "total": {
+            "label": "Total Premium",
+            "value": "₹ 4,856.00"
+          }
+        }
+      }
     }
   ],
   "submitButton": { "label": "Get Premium", "style": "primary" }
