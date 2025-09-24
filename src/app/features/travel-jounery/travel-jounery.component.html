@@ -37,7 +37,7 @@
         <div class="form-section p-3 row align-items-end">
           <ng-container *ngFor="let field of section.fields">
             <div *ngIf="field.type !== 'button'" class="mb-3 col-4">
-              <label class="text-sm required">{{ field.label }}</label>
+              <label class="form-label required">{{ field.label }}</label>
               <ng-container [ngSwitch]="field.type">
                 <input
                   *ngSwitchCase="'input'"
@@ -87,7 +87,7 @@
             [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
             class="mb-3"
           >
-            <label class="text-sm required">{{ field.label }}</label>
+            <label class="form-label required">{{ field.label }}</label>
             <div [ngSwitch]="field.type">
               <input
                 *ngSwitchCase="'input'"
@@ -171,7 +171,7 @@
                 [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                 class="mb-3"
               >
-                <label class="text-sm required">{{ field.label }}</label>
+                <label class="form-label required">{{ field.label }}</label>
                 <ng-container [ngSwitch]="field.type">
                   <input
                     *ngSwitchCase="'input'"
@@ -239,7 +239,7 @@
                   [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                   class="mb-3"
                 >
-                  <label class="text-sm required">{{ field.label }}</label>
+                  <label class="form-label required">{{ field.label }}</label>
                   <ng-container [ngSwitch]="field.type">
                     <input
                       *ngSwitchCase="'input'"
@@ -309,7 +309,7 @@
             >
               <label
                 *ngIf="field.type !== 'label' && field.type !== 'button'"
-                class="text-sm"
+                class="form-label"
               >
                 {{ field.label }}
               </label>
@@ -447,7 +447,7 @@
                     [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                     class="mb-3"
                   >
-                    <label class="text-sm required">{{ field.label }}</label>
+                    <label class="form-label required">{{ field.label }}</label>
                     <ng-container [ngSwitch]="field.type">
                       <input
                         *ngSwitchCase="'input'"
@@ -484,7 +484,7 @@
                   >
                     <label
                       *ngIf="field.type !== 'checkbox'"
-                      class="text-sm required"
+                      class="form-label required"
                     >
                       {{ field.label }}
                     </label>
@@ -588,7 +588,7 @@
                   [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                   class="mb-3"
                 >
-                  <label class="text-sm required">{{ field.label }}</label>
+                  <label class="form-label required">{{ field.label }}</label>
                   <ng-container [ngSwitch]="field.type">
                     <input
                       *ngSwitchCase="'input'"
@@ -624,7 +624,7 @@
                   [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                   class="mb-3"
                 >
-                  <label *ngIf="field.type !== 'checkbox'" class="text-sm">
+                  <label *ngIf="field.type !== 'checkbox'" class="form-label">
                     {{ field.label }}
                   </label>
                   <ng-container [ngSwitch]="field.type">
@@ -693,7 +693,7 @@
                     [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                     class="mb-3"
                   >
-                    <label class="text-sm required">{{ field.label }}</label>
+                    <label class="form-label required">{{ field.label }}</label>
                     <ng-container [ngSwitch]="field.type">
                       <input
                         *ngSwitchCase="'input'"
@@ -728,7 +728,7 @@
                     [ngClass]="field.fullWidth ? 'col-12' : 'col-4'"
                     class="mb-3"
                   >
-                    <label *ngIf="field.type !== 'checkbox'" class="text-sm">
+                    <label *ngIf="field.type !== 'checkbox'" class="form-label">
                       {{ field.label }}
                     </label>
                     <ng-container [ngSwitch]="field.type">
