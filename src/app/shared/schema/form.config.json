@@ -3,150 +3,149 @@
   "breadCrumbs": [
     { "title": "Dashboard", "link": "/dashBoard" },
     { "title": "Travel", "link": "/travel" },
-    { "title": "New Quote", "link": "/newQuote" }
+    { "title": "New Quote", "link": "/newQuote", "isActive": true }
   ],
   "sections": [
     {
-      "id": "1",
       "title": "Policy Details",
       "type": "policyDetails",
-      "fields": [
+      "componentType": "standard",
+      "isExpandedByDefault": true,
+      "subsections": [
         {
-          "type": "input",
-          "inputType": "text",
-          "name": "masterPolicy",
-          "label": "Master Policy",
-          "placeholder": "Enter Policy Number",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "Policy Number is required" }
-        },
-        {
-          "type": "button",
-          "name": "createCertificate",
-          "label": "Create Certificate",
-          "icon": "assets/icons/add-certi.svg",
-          "buttonType": "outline"
+          "fields": [
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "masterPolicy",
+              "label": "Master Policy",
+              "placeholder": "Enter Policy Number",
+              "validators": { "required": true },
+              "errors": { "required": "Policy Number is required" }
+            },
+            {
+              "type": "button",
+              "name": "createCertificate",
+              "label": "Create Certificate",
+              "iconPath": "assets/icons/add-certi.svg",
+              "buttonType": "outline"
+            }
+          ]
         }
       ]
     },
     {
-      "id": "2",
       "title": "Base Details",
       "type": "baseDetails",
-      "fields": [
+      "componentType": "standard",
+      "isCollapsible": true,
+      "isExpandedByDefault": false,
+      "subsections": [
         {
-          "type": "datepicker",
-          "name": "policyCoverStartDate",
-          "label": "Master Policy Cover Start Date",
-          "placeholder": "Enter Start Date",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "Start Date is required" }
-        },
-        {
-          "type": "datepicker",
-          "name": "policyCoverEndDate",
-          "label": "Master Policy Cover End Date",
-          "placeholder": "Enter End Date",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "End Date is required" }
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "duration",
-          "label": "Duration",
-          "placeholder": "Enter Duration",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "Duration is required" }
-        },
-        {
-          "type": "select",
-          "name": "plan",
-          "label": "Plan",
-          "placeholder": "Enter Plan",
-          "value": "",
-          "options": [{ "key": "plan", "value": "Plan" }],
-          "validators": { "required": true },
-          "errors": { "required": "Plan is required" }
-        },
-        {
-          "type": "select",
-          "name": "preposition",
-          "label": "Preposition",
-          "placeholder": "Enter Preposition",
-          "value": "",
-          "options": [
-            { "key": "prepositionA", "value": "Preposition A" },
-            { "key": "prepositionB", "value": "Preposition B" },
-            { "key": "prepositionC", "value": "Preposition C" }
-          ],
-          "validators": { "required": true },
-          "errors": { "required": "Preposition is required" }
-        },
-        {
-          "type": "select",
-          "name": "placeOfOrigin",
-          "label": "Place of Origin",
-          "placeholder": "Enter Place of Origin",
-          "value": "",
-          "options": [
-            { "key": "delhi", "value": "Delhi" },
-            { "key": "mumbai", "value": "Mumbai" },
-            { "key": "london", "value": "London" }
-          ],
-          "validators": { "required": true },
-          "errors": { "required": "Place of Origin is required" }
-        },
-        {
-          "type": "select",
-          "name": "placeOfDestination",
-          "label": "Place of Destination",
-          "placeholder": "Enter Place of Destination",
-          "value": "",
-          "options": [
-            { "key": "delhi", "value": "Delhi" },
-            { "key": "mumbai", "value": "Mumbai" },
-            { "key": "london", "value": "London" }
-          ],
-          "validators": { "required": true },
-          "errors": { "required": "Place of Destination is required" }
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "partnerApplicationNumber",
-          "label": "Partner Application Number",
-          "placeholder": "Partner Application Number",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "Partner Application Number is required" }
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "partyCode",
-          "label": "Party Code",
-          "placeholder": "Party Code",
-          "value": "",
-          "validators": { "required": true },
-          "errors": { "required": "Party Code is required" }
+          "fields": [
+            {
+              "type": "datepicker",
+              "name": "policyCoverStartDate",
+              "label": "Master Policy Cover Start Date",
+              "placeholder": "Enter Start Date",
+              "validators": { "required": true },
+              "errors": { "required": "Start Date is required" }
+            },
+            {
+              "type": "datepicker",
+              "name": "policyCoverEndDate",
+              "label": "Master Policy Cover End Date",
+              "placeholder": "Enter End Date",
+              "validators": { "required": true },
+              "errors": { "required": "End Date is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "duration",
+              "label": "Duration",
+              "placeholder": "Enter Duration",
+              "validators": { "required": true },
+              "errors": { "required": "Duration is required" }
+            },
+            {
+              "type": "select",
+              "name": "plan",
+              "label": "Plan",
+              "placeholder": "Enter Plan",
+              "options": [{ "key": "plan", "name": "Plan" }],
+              "validators": { "required": true },
+              "errors": { "required": "Plan is required" }
+            },
+            {
+              "type": "select",
+              "name": "preposition",
+              "label": "Preposition",
+              "placeholder": "Enter Preposition",
+              "options": [
+                { "key": "prepositionA", "name": "Preposition A" },
+                { "key": "prepositionB", "name": "Preposition B" },
+                { "key": "prepositionC", "name": "Preposition C" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Preposition is required" }
+            },
+            {
+              "type": "select",
+              "name": "placeOfOrigin",
+              "label": "Place of Origin",
+              "placeholder": "Enter Place of Origin",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Place of Origin is required" }
+            },
+            {
+              "type": "select",
+              "name": "placeOfDestination",
+              "label": "Place of Destination",
+              "placeholder": "Enter Place of Destination",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Place of Destination is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "partnerApplicationNumber",
+              "label": "Partner Application Number",
+              "placeholder": "Partner Application Number",
+              "validators": { "required": true },
+              "errors": { "required": "Partner Application Number is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "partyCode",
+              "label": "Party Code",
+              "placeholder": "Party Code",
+              "validators": { "required": true },
+              "errors": { "required": "Party Code is required" }
+            }
+          ]
         }
       ]
     },
     {
-      "id": "3",
       "title": "Departure Details",
       "type": "departureDetails",
-      "fields": [
+      "componentType": "standard",
+      "isCollapsible": true,
+      "isExpandedByDefault": false,
+      "subsections": [
         {
-          "type": "group",
-          "name": "departureFlights",
-          "label": "Departure Flights",
-          "repeatable": true,
           "fields": [
             {
               "type": "select",
@@ -212,25 +211,89 @@
           ]
         },
         {
-          "type": "button",
-          "name": "addConnectingFlight",
-          "label": "Add Connecting Flight",
-          "icon": "assets/icons/icon-upload.svg",
-          "buttonType": "outline"
+          "type": "form-array",
+          "title": "Departure Flight",
+          "name": "departureFlights",
+          "addButtonLabel": "Add Connecting Flight",
+          "formGroupTemplate": [
+            {
+              "type": "select",
+              "name": "journeyStartFrom",
+              "label": "Journey Start From",
+              "placeholder": "Select journey start from",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Start From is required" }
+            },
+            {
+              "type": "select",
+              "name": "journeyDestination",
+              "label": "Journey Destination/Halt",
+              "placeholder": "Select destination/halt",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Destination/Halt is required" }
+            },
+            {
+              "type": "datepicker",
+              "name": "flightDate",
+              "label": "Flight Date",
+              "placeholder": "Select flight date",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Date is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "flightNumber",
+              "label": "Flight Number",
+              "placeholder": "Enter flight number",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Number is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "flightName",
+              "label": "Flight Name",
+              "placeholder": "Enter flight name",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Name is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "pnrNumber",
+              "label": "PNR Number",
+              "placeholder": "Enter PNR number",
+              "validators": { "required": true },
+              "errors": { "required": "PNR Number is required" }
+            }
+          ]
         },
         {
-          "type": "checkbox",
-          "name": "returnJourney",
-          "label": "Return Journey",
-          "value": false,
-          "fullWidth": true
+          "fields": [
+            {
+              "type": "checkbox",
+              "name": "returnJourney",
+              "label": "Return Journey",
+              "value": false
+            }
+          ]
         },
         {
-          "type": "group",
-          "name": "returnFlights",
-          "label": "Return Flights",
-          "repeatable": true,
-          "hidden": true,
+          "showWhen": {
+            "field": "returnJourney",
+            "value": true
+          },
           "fields": [
             {
               "type": "select",
@@ -241,7 +304,9 @@
                 { "key": "delhi", "value": "Delhi" },
                 { "key": "mumbai", "value": "Mumbai" },
                 { "key": "london", "value": "London" }
-              ]
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Start From is required" }
             },
             {
               "type": "select",
@@ -252,7 +317,70 @@
                 { "key": "delhi", "value": "Delhi" },
                 { "key": "mumbai", "value": "Mumbai" },
                 { "key": "london", "value": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Destination/Halt is required" }
+            },
+            {
+              "type": "datepicker",
+              "name": "flightDate",
+              "label": "Flight Date",
+              "placeholder": "Select flight date",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Date is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "flightNumber",
+              "label": "Flight Number",
+              "placeholder": "Enter flight number",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Number is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "flightName",
+              "label": "Flight Name",
+              "placeholder": "Enter flight name",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Name is required" }
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "name": "pnrNumber",
+              "label": "PNR Number",
+              "placeholder": "Enter PNR number",
+              "validators": { "required": true },
+              "errors": { "required": "PNR Number is required" }
+            }
+          ]
+        },
+        {
+          "title": "Return Flights",
+          "type": "form-array",
+          "name": "returnFlights",
+          "addButtonLabel": "Add Return Flight",
+
+          "formGroupTemplate": [
+            {
+              "type": "select",
+              "name": "journeyStartFrom",
+              "label": "Journey Start From",
+              "placeholder": "Select journey start from",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
               ]
+            },
+            {
+              "type": "input",
+              "name": "flightNumber",
+              "label": "Flight Number",
+              "placeholder": "Enter flight number"
             },
             {
               "type": "datepicker",
@@ -282,104 +410,102 @@
               "placeholder": "Enter PNR number"
             }
           ]
-        },
-        {
-          "type": "button",
-          "name": "addReturnFlight",
-          "label": "Add Return Flight",
-          "icon": "assets/icons/icon-upload.svg",
-          "buttonType": "outline"
         }
       ]
     },
+
     {
-      "id": "4",
       "title": "Insured Details",
       "type": "insuredDetails",
-      "fields": [
+      "isCollapsible": true,
+      "isExpandedByDefault": false,
+      "subsections": [
         {
-          "type": "checkbox",
-          "name": "riskType",
-          "label": "Risk Type",
-          "options": [
-            { "key": "family", "value": "Family" },
-            { "key": "individual", "value": "Individual" }
-          ],
-          "value": ["family"],
-          "fullWidth": true
+          "title": "Risk Type",
+          "fields": [
+            {
+              "type": "checkbox",
+              "name": "riskType",
+              "label": "Risk Type",
+              "options": [
+                { "key": "family", "name": "Family" },
+                { "key": "individual", "name": "Individual" }
+              ],
+              "value": ["family"],
+              "fullWidth": true
+            },
+            {
+              "type": "stepper",
+              "name": "familyCount",
+              "label": "Family Count",
+              "value": 1,
+              "min": 0,
+              "max": 10,
+              "showWhen": {
+                "field": "riskType",
+                "value": "family",
+                "mode": "includes"
+              }
+            },
+            {
+              "type": "stepper",
+              "name": "individualCount",
+              "label": "Individual Count",
+              "value": 0,
+              "min": 0,
+              "max": 10,
+              "lessWidth": true,
+              "showWhen": {
+                "field": "riskType",
+                "value": "individual",
+                "mode": "includes"
+              }
+            }
+          ]
         },
         {
-          "type": "stepper",
-          "name": "familyCount",
-          "value": 1,
-          "min": 0,
-          "max": 10
-        },
-        {
-          "type": "stepper",
-          "name": "individualCount",
-          "value": 0,
-          "min": 0,
-          "max": 10,
-          "lessWidth": true
-        },
-        {
-          "type": "button",
-          "name": "addSelf",
-          "label": "Add Self",
-          "icon": "assets/icons/icon-upload.svg",
-          "buttonType": "outline"
-        },
-        {
-          "type": "button",
-          "name": "addSpouse",
-          "label": "Add Spouse",
-          "icon": "assets/icons/icon-upload.svg",
-          "buttonType": "outline"
-        },
-        {
-          "type": "button",
-          "name": "addChild",
-          "label": "Add Child",
-          "icon": "assets/icons/icon-upload.svg",
-          "buttonType": "outline"
-        },
-        {
-          "type": "button",
-          "name": "addMoreInsured",
-          "label": "Add More Insured",
-          "icon": "assets/icons/add-insured.svg",
-          "buttonType": "outline"
+          "type": "form-array",
+          "name": "families",
+          "title": "Family",
+          "showWhen": {
+            "field": "riskType",
+            "value": "family",
+            "mode": "includes"
+          },
+          "formGroupTemplate": [
+            {
+              "type": "button",
+              "name": "addSelf",
+              "label": "Add Self",
+              "buttonType": "outline"
+            },
+            {
+              "type": "button",
+              "name": "addSpouse",
+              "label": "Add Spouse",
+              "buttonType": "outline"
+            },
+            {
+              "type": "button",
+              "name": "addChild",
+              "label": "Add Child",
+              "buttonType": "outline"
+            }
+          ]
         }
       ],
       "personFields": [
         {
           "type": "input",
-          "inputType": "text",
-          "name": "employeeId",
-          "label": "Employee/Unique ID",
-          "placeholder": "Enter employee/unique ID"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
           "name": "firstName",
           "label": "First Name",
           "placeholder": "Enter first name"
         },
         {
           "type": "input",
-          "inputType": "text",
           "name": "lastName",
           "label": "Last Name",
           "placeholder": "Enter last name"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "emailId",
-          "label": "Email ID",
-          "placeholder": "Enter email ID"
         },
         {
           "type": "datepicker",
@@ -393,125 +519,30 @@
           "label": "Gender",
           "placeholder": "Select gender",
           "options": [
-            { "key": "male", "value": "Male" },
-            { "key": "female", "value": "Female" }
+            { "key": "male", "name": "Male" },
+            { "key": "female", "name": "Female" }
           ]
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "mobileNumber",
-          "label": "Mobile Number",
-          "placeholder": "Enter mobile number"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "passportNumber",
-          "label": "Passport Number",
-          "placeholder": "Enter passport number"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "panNumber",
-          "label": "PAN Number",
-          "placeholder": "Enter PAN number"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "pincode",
-          "label": "Pincode",
-          "placeholder": "Enter pincode"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "address1",
-          "label": "Address 1",
-          "placeholder": "Enter address 1"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "address2",
-          "label": "Address 2",
-          "placeholder": "Enter address 2"
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "address3",
-          "label": "Address 3",
-          "placeholder": "Enter address 3"
         }
       ],
       "nomineeFields": [
         {
-          "type": "checkbox",
-          "name": "sameAsPrimary",
-          "label": "Same As Primary Insured",
-          "value": false,
-          "fullWidth": true
-        },
-        {
           "type": "input",
-          "inputType": "text",
           "name": "nomineeName",
-          "label": "Name",
-          "placeholder": "Enter name"
-        },
-        {
-          "type": "datepicker",
-          "name": "nomineeDob",
-          "label": "Date of Birth",
-          "placeholder": "Select date of birth"
-        },
-        {
-          "type": "select",
-          "name": "nomineeGender",
-          "label": "Gender",
-          "placeholder": "Select gender",
-          "options": [
-            { "key": "male", "value": "Male" },
-            { "key": "female", "value": "Female" }
-          ]
+          "label": "Nominee Name",
+          "placeholder": "Enter nominee name"
         },
         {
           "type": "select",
           "name": "relationship",
-          "label": "Relationship with Insured Person",
+          "label": "Relationship",
           "placeholder": "Select relationship",
           "options": [
-            { "key": "spouse", "value": "Spouse" },
-            { "key": "child", "value": "Child" },
-            { "key": "parent", "value": "Parent" }
+            { "key": "spouse", "name": "Spouse" },
+            { "key": "child", "name": "Child" },
+            { "key": "parent", "name": "Parent" }
           ]
-        },
-        {
-          "type": "input",
-          "inputType": "text",
-          "name": "nomineeAddress",
-          "label": "Address",
-          "placeholder": "Enter address"
         }
-      ],
-      "modals": {
-        "premiumSummary": {
-          "title": "Premium Summary",
-          "items": [
-            { "label": "Premium Excluding Terrorism", "value": "₹ 4,000.00" },
-            { "label": "Terrorism Premium", "value": "₹ 115.50" },
-            { "label": "Gross Premium", "value": "₹ 4,115.50" },
-            { "label": "IGST 18%:", "value": "₹ 740.79" }
-          ],
-          "total": {
-            "label": "Total Premium",
-            "value": "₹ 4,856.00"
-          }
-        }
-      }
+      ]
     }
   ],
   "submitButton": { "label": "Get Premium", "style": "primary" }

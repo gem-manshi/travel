@@ -1,4 +1,26 @@
-<div [formGroup]="form">
+<div
+  [formGroup]="form"
+  *ngIf="
+    form &&
+    (!field.showWhen ||
+      (field.showWhen.mode === 'includes'
+        ? form.get(field.showWhen.field)?.value?.includes(field.showWhen.value)
+        : form.get(field.showWhen.field)?.value === field.showWhen.value))
+  "
+>
+  <label
+    [for]="field.name"
+    class="form-label"
+    *ngIf="
+      field.type !== 'button' &&
+      field.type !== 'toggle' &&
+      field.type !== 'checkbox'
+    "
+    [class.required]="field.validators?.required"
+  >
+    {{ field.label }}
+  </label>
+
   <ng-container [ngSwitch]="field.type">
     <input
       *ngSwitchCase="'input'"
@@ -7,17 +29,22 @@
       class="form-control"
       [formControlName]="field.name"
       [placeholder]="field.placeholder || ''"
-      [class.form-control-error]="isInvalid"
+      [class.error]="isInvalid"
     />
 
     <ng-select
       *ngSwitchCase="'select'"
       [items]="field.options"
       bindLabel="name"
-      bindValue="id"
+      [bindValue]="
+        field.options && field.options.length > 0 && field.options[0].key
+          ? 'key'
+          : 'id'
+      "
       [placeholder]="field.placeholder || ''"
       [formControlName]="field.name"
-      [class.form-control-error]="isInvalid"
+      [class.error]="isInvalid"
+      appendTo="body"
     ></ng-select>
 
     <div
@@ -31,17 +58,91 @@
         [formControlName]="field.name"
         [placeholder]="field.placeholder || ''"
         bsDatepicker
-        [class.form-control-error]="isInvalid"
+        [class.error]="isInvalid"
       />
+    </div>
+
+    <button
+      *ngSwitchCase="'button'"
+      type="button"
+      class="btn btn-outline btn-md w-100"
+      (click)="onButtonClick()"
+    >
+      <img
+        *ngIf="field.iconPath"
+        [src]="field.iconPath"
+        [alt]="field.label"
+        class="btn-icon"
+      />
+      <span>{{ field.label }}</span>
+    </button>
+
+    <div *ngSwitchCase="'checkbox'">
+      <div
+        *ngIf="field.options?.length > 0; else singleCheckbox"
+        class="d-flex gap-3 flex-wrap"
+      >
+        <div *ngFor="let opt of field.options" class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [id]="field.name + '_' + opt.key"
+            [value]="opt.key"
+            (change)="onCheckboxChange($event, field)"
+            [checked]="form.get(field.name)?.value?.includes(opt.key)"
+          />
+          <label class="form-check-label" [for]="field.name + '_' + opt.key">
+            {{ opt.name || opt.value }}
+          </label>
+        </div>
+      </div>
+
+      <ng-template #singleCheckbox>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [id]="field.name"
+            [formControlName]="field.name"
+          />
+          <label class="form-check-label" [for]="field.name">
+            {{ field.label }}
+          </label>
+        </div>
+      </ng-template>
+    </div>
+
+    <div
+      *ngSwitchCase="'stepper'"
+      class="stepper-class d-flex align-items-center gap-2"
+    >
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm sign-css"
+        (click)="decrementStepper(field)"
+      >
+        −
+      </button>
+
+      <span class="counter-css">
+        {{ form.get(field.name)?.value }}
+      </span>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm sign-css"
+        (click)="incrementStepper(field)"
+      >
+        +
+      </button>
     </div>
   </ng-container>
 
-  <!-- Need to refactor this code to use common component for error display
   <div *ngIf="isInvalid" class="invalid-feedback d-block">
     <div *ngFor="let key of getErrorKeys(form.get(field.name)?.errors)">
       <div *ngIf="form.get(field.name)?.hasError(key)">
         {{ field.errors?.[key] }}
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

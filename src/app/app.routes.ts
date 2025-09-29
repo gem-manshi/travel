@@ -4,14 +4,14 @@ export const routes: Routes = [
   {
     path: 'travel-journey',
     loadComponent: () =>
-      import('../app/features/travel-jounery/travel-jounery.component').then(
-        (m) => m.TravelJouneryComponent,
+      import('../app/travel-journey/travel-journey.component').then(
+        (m) => m.TravelJourneyComponent,
       ),
   },
   {
     path: 'travel-summary',
     loadComponent: () =>
-      import('../app/features/travel-summary/travel-summary.component').then(
+      import('../app/travel-summary/travel-summary.component').then(
         (m) => m.TravelSummaryComponent,
       ),
   },
