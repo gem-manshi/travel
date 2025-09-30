@@ -178,6 +178,120 @@ export class SectionComponent implements OnInit {
 
         selfInsuredArray.push(selfGroup);
       }
+      const addSelfCtrl = familyGroup.get('addSelf');
+      if (addSelfCtrl) {
+        addSelfCtrl.disable();
+      }
+    }
+    if (field.name === 'addSpouse') {
+      const familiesArray = this.getFormArray('families');
+      const familyGroup = familiesArray.at(
+        familiesArray.length - 1,
+      ) as FormGroup;
+
+      let spouseInsuredArray = familyGroup.get('spouseInsured') as FormArray;
+      if (!spouseInsuredArray) {
+        spouseInsuredArray = this.fb.array([]);
+        familyGroup.addControl('spouseInsured', spouseInsuredArray);
+      }
+
+      const spouseConfig = this.section.subsections
+        .find((s: any) => s.name === 'families')
+        ?.subsections.find((s: any) => s.name === 'spouseInsured');
+
+      if (spouseConfig) {
+        const spouseGroup = this.fb.group({});
+
+        spouseConfig.formGroupTemplate.forEach((field: any) => {
+          spouseGroup.addControl(
+            field.name,
+            this.fb.control(field.value || null),
+          );
+        });
+
+        const nomineeConfig = spouseConfig.subsections?.find(
+          (s: any) => s.name === 'nominees',
+        );
+
+        if (nomineeConfig) {
+          const nomineesArray: FormArray = this.fb.array([]);
+          const nomineeGroup = this.fb.group({
+            sameAsPrimary: [false],
+            nomineeName: [null],
+            nomineeDob: [null],
+            nomineeGender: [null],
+            relationship: [null],
+            nomineeAddress: [null],
+          });
+
+          nomineeConfig.formGroupTemplate.forEach((field: any) => {
+            nomineeGroup.addControl(
+              field.name,
+              this.fb.control(field.value || null),
+            );
+          });
+
+          nomineesArray.push(nomineeGroup);
+          spouseGroup.addControl('nominees', nomineesArray);
+        }
+
+        spouseInsuredArray.push(spouseGroup);
+      }
+    }
+    if (field.name === 'addChild') {
+      const familiesArray = this.getFormArray('families');
+      const familyGroup = familiesArray.at(
+        familiesArray.length - 1,
+      ) as FormGroup;
+
+      let childInsuredArray = familyGroup.get('childInsured') as FormArray;
+      if (!childInsuredArray) {
+        childInsuredArray = this.fb.array([]);
+        familyGroup.addControl('childInsured', childInsuredArray);
+      }
+
+      const childConfig = this.section.subsections
+        .find((s: any) => s.name === 'families')
+        ?.subsections.find((s: any) => s.name === 'childInsured');
+
+      if (childConfig) {
+        const childGroup = this.fb.group({});
+
+        childConfig.formGroupTemplate.forEach((field: any) => {
+          childGroup.addControl(
+            field.name,
+            this.fb.control(field.value || null),
+          );
+        });
+
+        const nomineeConfig = childConfig.subsections?.find(
+          (s: any) => s.name === 'nominees',
+        );
+
+        if (nomineeConfig) {
+          const nomineesArray: FormArray = this.fb.array([]);
+          const nomineeGroup = this.fb.group({
+            sameAsPrimary: [false],
+            nomineeName: [null],
+            nomineeDob: [null],
+            nomineeGender: [null],
+            relationship: [null],
+            nomineeAddress: [null],
+          });
+
+          nomineeConfig.formGroupTemplate.forEach((field: any) => {
+            nomineeGroup.addControl(
+              field.name,
+              this.fb.control(field.value || null),
+            );
+          });
+
+          nomineesArray.push(nomineeGroup);
+          childGroup.addControl('nominees', nomineesArray);
+        }
+
+        childInsuredArray.push(childGroup);
+      }
     }
   }
 
@@ -192,7 +306,51 @@ export class SectionComponent implements OnInit {
     if (control && control.length > 0) {
       control.removeAt(childIndex);
     }
+
+    if (childName === 'selfInsured' && (!control || control.length === 0)) {
+      const addSelfCtrl = parentGroup.get('addSelf');
+      if (addSelfCtrl) {
+        addSelfCtrl.enable();
+      }
+    }
   }
+  onSameAsPrimaryChange(
+    nomineeGroup: FormGroup,
+    familyIndex: number,
+    relation: 'spouseInsured' | 'childInsured',
+  ) {
+    const familiesArray = this.getFormArray('families');
+    const familyGroup = familiesArray.at(familyIndex) as FormGroup;
+
+    const selfInsuredArray = familyGroup.get('selfInsured') as FormArray;
+    if (!selfInsuredArray || selfInsuredArray.length === 0) return;
+
+    const selfGroup = selfInsuredArray.at(0) as FormGroup;
+
+    const sameAs = nomineeGroup.get('sameAsPrimary')?.value;
+
+    if (sameAs) {
+      nomineeGroup.patchValue({
+        nomineeName:
+          (selfGroup.get('firstName')?.value || '') +
+          ' ' +
+          (selfGroup.get('lastName')?.value || ''),
+        nomineeDob: selfGroup.get('dob')?.value,
+        nomineeGender: selfGroup.get('gender')?.value,
+        nomineeAddress: selfGroup.get('address1')?.value,
+        relationship: relation === 'spouseInsured' ? 'spouse' : 'child',
+      });
+    } else {
+      nomineeGroup.patchValue({
+        nomineeName: null,
+        nomineeDob: null,
+        nomineeGender: null,
+        nomineeAddress: null,
+        relationship: null,
+      });
+    }
+  }
+
   getInnerFormGroupArray(
     parentGroup: FormGroup,
     childName: string,
