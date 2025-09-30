@@ -43,6 +43,17 @@ export class SectionComponent implements OnInit {
   getFormGroupFromArray(subsectionName: string, index: number): FormGroup {
     return this.getFormArray(subsectionName).at(index) as FormGroup;
   }
+  getNestedFormGroupArray(
+    parentName: string,
+    index: number,
+    childName: string,
+  ): FormGroup[] {
+    const parentGroup = this.getFormGroupFromArray(parentName, index);
+    const control = parentGroup.get(childName);
+    return control instanceof FormArray
+      ? (control.controls as FormGroup[])
+      : [];
+  }
 
   ngOnInit(): void {
     this.isExpanded = this.section.isExpandedByDefault ?? true;
@@ -119,40 +130,85 @@ export class SectionComponent implements OnInit {
         this.addGroup(familiesConfig);
       }
     }
-    if (field.name === 'addSelf') {
-      console.log('Add Self clicked', field);
-      field.disabled = true;
 
+    if (field.name === 'addSelf') {
       const familiesArray = this.getFormArray('families');
       const familyGroup = familiesArray.at(
         familiesArray.length - 1,
       ) as FormGroup;
 
-      (this.personFields || []).forEach((p: any) => {
-        if (!familyGroup.get(p.name)) {
-          familyGroup.addControl(p.name, this.fb.control(p.value || null));
-        }
-      });
+      let selfInsuredArray = familyGroup.get('selfInsured') as FormArray;
+      if (!selfInsuredArray) {
+        selfInsuredArray = this.fb.array([]);
+        familyGroup.addControl('selfInsured', selfInsuredArray);
+      }
 
-      (this.nomineeFields || []).forEach((n: any) => {
-        if (!familyGroup.get(n.name)) {
-          familyGroup.addControl(n.name, this.fb.control(n.value || null));
+      const selfConfig = this.section.subsections
+        .find((s: any) => s.name === 'families')
+        ?.subsections.find((s: any) => s.name === 'selfInsured');
+
+      if (selfConfig) {
+        const selfGroup = this.fb.group({});
+
+        selfConfig.formGroupTemplate.forEach((field: any) => {
+          selfGroup.addControl(
+            field.name,
+            this.fb.control(field.value || null),
+          );
+        });
+
+        const nomineeConfig = selfConfig.subsections?.find(
+          (s: any) => s.name === 'nominees',
+        );
+
+        if (nomineeConfig) {
+          const nomineesArray: FormArray = this.fb.array([]);
+          const nomineeGroup = this.fb.group({});
+
+          nomineeConfig.formGroupTemplate.forEach((field: any) => {
+            nomineeGroup.addControl(
+              field.name,
+              this.fb.control(field.value || null),
+            );
+          });
+
+          nomineesArray.push(nomineeGroup);
+          selfGroup.addControl('nominees', nomineesArray);
         }
-      });
+
+        selfInsuredArray.push(selfGroup);
+      }
     }
   }
 
-  // addGroup(subsection: any) {
-  //   const formArray = this.form.get(subsection.name) as FormArray;
+  removeNestedGroup(
+    parentName: string,
+    parentIndex: number,
+    childName: string,
+    childIndex: number,
+  ) {
+    const parentGroup = this.getFormGroupFromArray(parentName, parentIndex);
+    const control = parentGroup.get(childName) as FormArray;
+    if (control && control.length > 0) {
+      control.removeAt(childIndex);
+    }
+  }
+  getInnerFormGroupArray(
+    parentGroup: FormGroup,
+    childName: string,
+  ): FormGroup[] {
+    const ctrl = parentGroup.get(childName);
+    return ctrl instanceof FormArray ? (ctrl.controls as FormGroup[]) : [];
+  }
 
-  //   const group = this.fb.group({});
-
-  //   subsection.formGroupTemplate.forEach((field: any) => {
-  //     group.addControl(field.name, this.fb.control(field.value || null));
-  //   });
-
-  //   formArray.push(group);
-  // }
+  removeFromChildArray(
+    parentGroup: FormGroup,
+    childName: string,
+    index: number,
+  ): void {
+    const arr = parentGroup.get(childName) as FormArray | null;
+    if (arr && index > -1 && index < arr.length) arr.removeAt(index);
+  }
 
   getFormGroup(control: AbstractControl): FormGroup {
     return this.formService.getFormGroup(control);
