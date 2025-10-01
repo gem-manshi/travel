@@ -170,7 +170,6 @@
                                     subsection.subsections[0].subsections[0]
                                       .title
                                   }}
-                                  {{ k + 1 }}
                                 </p>
                               </div>
 
@@ -274,7 +273,6 @@
                                     subsection.subsections[1].subsections[0]
                                       .title
                                   }}
-                                  {{ k + 1 }}
                                 </p>
                               </div>
                               <div class="col-12">
@@ -405,7 +403,6 @@
                                     subsection.subsections[2].subsections[0]
                                       .title
                                   }}
-                                  {{ k + 1 }}
                                 </p>
                               </div>
 
@@ -423,7 +420,6 @@
                                       )
                                     "
                                   />
-
                                   <label class="form-check-label"
                                     >Same As Primary Insured</label
                                   >
@@ -445,6 +441,27 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div
+                        class="col-auto mt-2"
+                        *ngIf="
+                          getNestedFormGroupArray('families', i, 'childInsured')
+                            .length > 0
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline btn-md"
+                          (click)="onButtonClick({ name: 'addChild' })"
+                        >
+                          <img
+                            src="/assets/icons/icon-add.svg"
+                            alt="Add Child"
+                            class="btn-icon"
+                          />
+                          <span>Add Child</span>
+                        </button>
                       </div>
                     </div>
                   </ng-container>

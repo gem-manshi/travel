@@ -85,7 +85,6 @@ export class SectionComponent implements OnInit {
     if (event.field.name === 'familyCount') {
       const familiesArray = this.getFormArray('families');
 
-      // find the families subsection from config
       const familiesConfig = this.section.subsections.find(
         (s: any) => s.name === 'families',
       );

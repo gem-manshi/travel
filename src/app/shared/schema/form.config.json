@@ -451,8 +451,8 @@
               "type": "stepper",
               "name": "individualCount",
               "label": "Individual Count",
-              "value": 0,
-              "min": 0,
+              "value": 1,
+              "min": 1,
               "max": 10,
               "lessWidth": true,
               "showWhen": {
