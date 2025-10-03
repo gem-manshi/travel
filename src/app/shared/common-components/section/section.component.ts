@@ -7,17 +7,13 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { FormFieldComponent } from '../form-field/form-field.component'; // Import the form field component
+import { FormFieldComponent } from '../form-field/form-field.component';
 import { FormService } from '@app/shared/form.service';
 
 @Component({
   selector: 'app-section',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormFieldComponent, // Add FormFieldComponent here
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormFieldComponent],
   templateUrl: './section.component.html',
 })
 export class SectionComponent implements OnInit {
@@ -55,15 +51,39 @@ export class SectionComponent implements OnInit {
       : [];
   }
 
+  getInnerFormGroupArray(
+    parentGroup: AbstractControl,
+    childName: string,
+  ): FormGroup[] {
+    const ctrl = (parentGroup as FormGroup).get(childName);
+    return ctrl instanceof FormArray ? (ctrl.controls as FormGroup[]) : [];
+  }
+
   ngOnInit(): void {
     this.isExpanded = this.section.isExpandedByDefault ?? true;
+
     this.section.subsections.forEach((subsection: any) => {
       if (subsection.type === 'form-array') {
-        const formArray = this.fb.array([]);
-        this.form.addControl(subsection.name, formArray);
+        if (!this.form.get(subsection.name)) {
+          this.form.addControl(subsection.name, this.fb.array([]));
+        }
 
         if (subsection.name === 'families') {
-          this.addGroup(subsection);
+          const familyCount = this.form.get('familyCount')?.value ?? 0;
+          if (familyCount > 0) {
+            for (let i = 0; i < familyCount; i++) {
+              this.addGroup(subsection);
+            }
+          }
+        }
+
+        if (subsection.name === 'individuals') {
+          const individualCount = this.form.get('individualCount')?.value ?? 0;
+          if (individualCount > 0) {
+            for (let i = 0; i < individualCount; i++) {
+              this.addGroup(subsection);
+            }
+          }
         }
       }
     });
@@ -78,13 +98,22 @@ export class SectionComponent implements OnInit {
       this.isExpanded = !this.isExpanded;
     }
   }
-  getFormArray(name: string): FormArray {
-    return this.formService.getFormArray(this.form, name);
+  getFormArray(name: string): FormArray<FormGroup> {
+    let ctrl = this.form.get(name) as FormArray<FormGroup> | null;
+    if (!ctrl) {
+      ctrl = this.fb.array<FormGroup>([]);
+      this.form.addControl(name, ctrl);
+    }
+    return ctrl;
   }
+
+  getFormGroup(control: AbstractControl): FormGroup {
+    return control as FormGroup;
+  }
+
   onStepperChange(event: any) {
     if (event.field.name === 'familyCount') {
       const familiesArray = this.getFormArray('families');
-
       const familiesConfig = this.section.subsections.find(
         (s: any) => s.name === 'families',
       );
@@ -100,20 +129,57 @@ export class SectionComponent implements OnInit {
         familiesArray.removeAt(familiesArray.length - 1);
       }
     }
+
+    if (event.field.name === 'individualCount') {
+      const individualsArray = this.getFormArray('individuals');
+      const individualsConfig = this.section.subsections.find(
+        (s: any) => s.name === 'individuals',
+      );
+
+      if (!individualsConfig) {
+        console.error('Individuals config not found!');
+        return;
+      }
+
+      if (event.action === 'increment') {
+        this.addGroup(individualsConfig);
+      } else if (event.action === 'decrement' && individualsArray.length > 1) {
+        individualsArray.removeAt(individualsArray.length - 1);
+      }
+    }
   }
 
   addGroup(subsection: any) {
     const formArray = this.getFormArray(subsection.name);
     const group = this.fb.group({});
 
-    if (subsection.formGroupTemplate && subsection.formGroupTemplate.length) {
+    if (subsection.formGroupTemplate?.length) {
       subsection.formGroupTemplate.forEach((field: any) => {
-        group.addControl(field.name, this.fb.control(field.value || null));
+        group.addControl(field.name, this.fb.control(field.value ?? null));
       });
+    }
+
+    if (subsection.name === 'individuals') {
+      const nomineeConfig = subsection.subsections?.find(
+        (s: any) => s.name === 'nominees',
+      );
+      if (nomineeConfig) {
+        const nomineesArray = this.fb.array<FormGroup>([]);
+        const nomineeGroup = this.fb.group({});
+        nomineeConfig.formGroupTemplate.forEach((field: any) => {
+          nomineeGroup.addControl(
+            field.name,
+            this.fb.control(field.value ?? null),
+          );
+        });
+        nomineesArray.push(nomineeGroup);
+        group.addControl('nominees', nomineesArray);
+      }
     }
 
     formArray.push(group);
   }
+
   onButtonClick(field: any) {
     if (field.name === 'addMoreInsured') {
       const familyCountCtrl = this.form.get('familyCount');
@@ -350,13 +416,13 @@ export class SectionComponent implements OnInit {
     }
   }
 
-  getInnerFormGroupArray(
-    parentGroup: FormGroup,
-    childName: string,
-  ): FormGroup[] {
-    const ctrl = parentGroup.get(childName);
-    return ctrl instanceof FormArray ? (ctrl.controls as FormGroup[]) : [];
-  }
+  // getInnerFormGroupArray(
+  //   parentGroup: AbstractControl,
+  //   childName: string,
+  // ): FormGroup[] {
+  //   const ctrl = (parentGroup as FormGroup).get(childName);
+  //   return ctrl instanceof FormArray ? (ctrl.controls as FormGroup[]) : [];
+  // }
 
   removeFromChildArray(
     parentGroup: FormGroup,
@@ -367,9 +433,9 @@ export class SectionComponent implements OnInit {
     if (arr && index > -1 && index < arr.length) arr.removeAt(index);
   }
 
-  getFormGroup(control: AbstractControl): FormGroup {
-    return this.formService.getFormGroup(control);
-  }
+  // getFormGroup(control: AbstractControl): FormGroup {
+  //   return this.formService.getFormGroup(control);
+  // }
   removeGroup(subsection: any, index: number) {
     const formArray = this.getFormArray(subsection.name);
     if (!formArray || formArray.length <= 0) return;

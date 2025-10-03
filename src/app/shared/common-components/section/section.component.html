@@ -35,14 +35,15 @@
             *ngIf="subsection.type === 'form-array'; else standardSection"
           >
             <div [formArrayName]="subsection.name">
-              <div
-                *ngFor="
-                  let group of getFormArray(subsection.name).controls;
-                  let i = index
-                "
-                class="form-array-group mb-lg"
-              >
-                <div [formGroupName]="i" class="row gy-4 gx-5">
+              <div *ngIf="subsection.name === 'individuals'">
+                <div
+                  *ngFor="
+                    let group of getFormArray(subsection.name).controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                  class="form-array-group mb-lg"
+                >
                   <div
                     class="col-12 d-flex justify-content-between align-items-center p-0"
                   >
@@ -51,437 +52,540 @@
                     </p>
                     <div
                       class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
-                      *ngIf="subsection.name !== 'families' || i > 0"
+                      *ngIf="i"
                       (click)="removeGroup(subsection, i)"
                     >
-                      <img src="/assets/icons/icon-remove.svg" alt="" />
+                      <img src="/assets/icons/icon-remove.svg" alt="remove" />
                       <span class="ms-1">Remove</span>
                     </div>
                   </div>
 
-                  <div class="row gy-3 gx-3 mb-3">
+                  <div class="row gy-4 gx-5 mb-3">
                     <div
                       *ngFor="let field of subsection.formGroupTemplate"
-                      class="col-12 col-md-4 col-lg-"
+                      class="col-12 col-md-6 col-lg-4 ps-0"
                     >
                       <app-form-field
                         [field]="field"
-                        [form]="form"
-                        (stepperChange)="onStepperChange($event)"
-                        (buttonClick)="onButtonClick($event)"
-                      ></app-form-field>
-                    </div>
-
-                    <div
-                      *ngIf="
-                        subsection.name === 'families' &&
-                        i === getFormArray(subsection.name).length - 1
-                      "
-                      class="col-12 col-md-4 col-lg-4"
-                    >
-                      <app-form-field
-                        [field]="{
-                          type: 'button',
-                          name: 'addMoreInsured',
-                          label: 'Add More Insured',
-                          buttonType: 'outline',
-                        }"
-                        [form]="form"
-                        (buttonClick)="onButtonClick($event)"
+                        [form]="group"
                       ></app-form-field>
                     </div>
                   </div>
 
-                  <ng-container *ngIf="subsection.name === 'families'">
+                  <div
+                    formArrayName="nominees"
+                    *ngIf="group.get('nominees') as nomineesArray"
+                  >
                     <div
-                      formArrayName="selfInsured"
-                      *ngIf="
-                        getFormGroupFromArray('families', i).get('selfInsured')
+                      *ngFor="
+                        let nomineeGroup of getInnerFormGroupArray(
+                          group,
+                          'nominees'
+                        );
+                        let k = index
                       "
-                      class="mt-3"
+                      [formGroupName]="k"
+                      class="form-array-group mb-lg"
                     >
-                      <div
-                        *ngFor="
-                          let selfGroup of getNestedFormGroupArray(
-                            'families',
-                            i,
-                            'selfInsured'
-                          );
-                          let j = index
-                        "
-                        [formGroupName]="j"
-                        class="form-array-group mb-lg"
-                      >
-                        <div
-                          class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
-                        >
-                          <p class="text-base text-primary font-semibold mb-md">
+                      <div class="row gy-4 gx-5">
+                        <div class="col-12 p-0">
+                          <p
+                            class="text-base text-blue-secondary font-semibold mb-md"
+                          >
                             {{ subsection.subsections[0].title }}
-                            {{ j + 1 }}
                           </p>
-                          <div
-                            class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
-                            (click)="
-                              removeNestedGroup('families', i, 'selfInsured', j)
-                            "
-                          >
-                            <img src="/assets/icons/icon-remove.svg" alt="" />
-                            <span class="ms-1">Remove</span>
-                          </div>
                         </div>
-
-                        <div class="row gy-4 gx-5">
-                          <div
-                            *ngFor="
-                              let field of subsection.subsections[0]
-                                .formGroupTemplate
-                            "
-                            class="col-12 col-md-6 col-lg-4 ps-0"
-                          >
-                            <app-form-field
-                              [field]="field"
-                              [form]="selfGroup"
-                            ></app-form-field>
-                          </div>
-                        </div>
-
                         <div
-                          formArrayName="nominees"
-                          *ngIf="selfGroup.get('nominees')"
-                          class="mt-3"
+                          *ngFor="
+                            let field of subsection.subsections[0]
+                              .formGroupTemplate
+                          "
+                          class="col-12 col-md-6 col-lg-4 ps-0"
                         >
-                          <div
-                            *ngFor="
-                              let nomineeGroup of getInnerFormGroupArray(
-                                selfGroup,
-                                'nominees'
-                              );
-                              let k = index
-                            "
-                            [formGroupName]="k"
-                            class="form-array-group mb-lg"
-                          >
-                            <div class="row gy-4 gx-5">
-                              <div class="col-12 p-0">
-                                <p
-                                  class="text-base text-blue-secondary font-semibold mb-md"
-                                >
-                                  {{
-                                    subsection.subsections[0].subsections[0]
-                                      .title
-                                  }}
-                                </p>
-                              </div>
-
-                              <div
-                                *ngFor="
-                                  let field of subsection.subsections[0]
-                                    .subsections[0].formGroupTemplate
-                                "
-                                class="col-12 col-md-6 col-lg-4 ps-0"
-                              >
-                                <app-form-field
-                                  [field]="field"
-                                  [form]="nomineeGroup"
-                                ></app-form-field>
-                              </div>
-                            </div>
-                          </div>
+                          <app-form-field
+                            [field]="field"
+                            [form]="getFormGroup(nomineeGroup)"
+                          ></app-form-field>
                         </div>
                       </div>
                     </div>
-                    <div
-                      formArrayName="spouseInsured"
-                      *ngIf="
-                        getFormGroupFromArray('families', i).get(
-                          'spouseInsured'
-                        )
-                      "
-                      class="mt-3"
-                    >
-                      <div
-                        *ngFor="
-                          let spouseGroup of getNestedFormGroupArray(
-                            'families',
-                            i,
-                            'spouseInsured'
-                          );
-                          let j = index
-                        "
-                        [formGroupName]="j"
-                        class="form-array-group mb-lg"
-                      >
-                        <div
-                          class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
-                        >
-                          <p class="text-base text-primary font-semibold mb-md">
-                            {{ subsection.subsections[1].title }} {{ j + 1 }}
-                          </p>
-                          <div
-                            class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
-                            (click)="
-                              removeNestedGroup(
-                                'families',
-                                i,
-                                'spouseInsured',
-                                j
-                              )
-                            "
-                          >
-                            <img src="/assets/icons/icon-remove.svg" alt="" />
-                            <span class="ms-1">Remove</span>
-                          </div>
-                        </div>
-
-                        <div class="row gy-4 gx-5">
-                          <div
-                            *ngFor="
-                              let field of subsection.subsections[1]
-                                .formGroupTemplate
-                            "
-                            class="col-12 col-md-6 col-lg-4 ps-0"
-                          >
-                            <app-form-field
-                              [field]="field"
-                              [form]="spouseGroup"
-                            ></app-form-field>
-                          </div>
-                        </div>
-
-                        <div
-                          formArrayName="nominees"
-                          *ngIf="spouseGroup.get('nominees')"
-                          class="mt-3"
-                        >
-                          <div
-                            *ngFor="
-                              let nomineeGroup of getInnerFormGroupArray(
-                                spouseGroup,
-                                'nominees'
-                              );
-                              let k = index
-                            "
-                            [formGroupName]="k"
-                            class="form-array-group mb-lg"
-                          >
-                            <div class="row gy-4 gx-5">
-                              <div class="col-12 p-0">
-                                <p
-                                  class="text-base text-blue-secondary font-semibold mb-md"
-                                >
-                                  {{
-                                    subsection.subsections[1].subsections[0]
-                                      .title
-                                  }}
-                                </p>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-check mb-3">
-                                  <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    formControlName="sameAsPrimary"
-                                    (change)="
-                                      onSameAsPrimaryChange(
-                                        nomineeGroup,
-                                        i,
-                                        'childInsured'
-                                      )
-                                    "
-                                  />
-
-                                  <label class="form-check-label"
-                                    >Same As Primary Insured</label
-                                  >
-                                </div>
-                              </div>
-                              <div
-                                *ngFor="
-                                  let field of subsection.subsections[1]
-                                    .subsections[0].formGroupTemplate
-                                "
-                                class="col-12 col-md-6 col-lg-4 ps-0"
-                              >
-                                <app-form-field
-                                  [field]="field"
-                                  [form]="nomineeGroup"
-                                  (change)="
-                                    field.name === 'sameAsPrimary' &&
-                                      onSameAsPrimaryChange(
-                                        nomineeGroup,
-                                        i,
-                                        'spouseInsured'
-                                      )
-                                  "
-                                ></app-form-field>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      formArrayName="childInsured"
-                      *ngIf="
-                        getFormGroupFromArray('families', i).get('childInsured')
-                      "
-                      class="mt-3"
-                    >
-                      <div
-                        *ngFor="
-                          let childGroup of getNestedFormGroupArray(
-                            'families',
-                            i,
-                            'childInsured'
-                          );
-                          let j = index
-                        "
-                        [formGroupName]="j"
-                        class="form-array-group mb-lg"
-                      >
-                        <div
-                          class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
-                        >
-                          <p class="text-base text-primary font-semibold mb-md">
-                            {{ subsection.subsections[2].title }} {{ j + 1 }}
-                          </p>
-                          <div
-                            class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
-                            (click)="
-                              removeNestedGroup(
-                                'families',
-                                i,
-                                'childInsured',
-                                j
-                              )
-                            "
-                          >
-                            <img src="/assets/icons/icon-remove.svg" alt="" />
-                            <span class="ms-1">Remove</span>
-                          </div>
-                        </div>
-
-                        <div class="row gy-4 gx-5">
-                          <div
-                            *ngFor="
-                              let field of subsection.subsections[2]
-                                .formGroupTemplate
-                            "
-                            class="col-12 col-md-6 col-lg-4 ps-0"
-                          >
-                            <app-form-field
-                              [field]="field"
-                              [form]="childGroup"
-                            ></app-form-field>
-                          </div>
-                        </div>
-
-                        <div
-                          formArrayName="nominees"
-                          *ngIf="childGroup.get('nominees')"
-                          class="mt-3"
-                        >
-                          <div
-                            *ngFor="
-                              let nomineeGroup of getInnerFormGroupArray(
-                                childGroup,
-                                'nominees'
-                              );
-                              let k = index
-                            "
-                            [formGroupName]="k"
-                            class="form-array-group mb-lg"
-                          >
-                            <div class="row gy-4 gx-5">
-                              <div
-                                class="col-12 d-flex justify-content-between align-items-center p-0"
-                              >
-                                <p
-                                  class="text-base text-blue-secondary font-semibold mb-md"
-                                >
-                                  {{
-                                    subsection.subsections[2].subsections[0]
-                                      .title
-                                  }}
-                                </p>
-                              </div>
-
-                              <div class="col-12">
-                                <div class="form-check mb-3">
-                                  <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    formControlName="sameAsPrimary"
-                                    (change)="
-                                      onSameAsPrimaryChange(
-                                        nomineeGroup,
-                                        i,
-                                        'childInsured'
-                                      )
-                                    "
-                                  />
-                                  <label class="form-check-label"
-                                    >Same As Primary Insured</label
-                                  >
-                                </div>
-                              </div>
-
-                              <div
-                                *ngFor="
-                                  let field of subsection.subsections[2]
-                                    .subsections[0].formGroupTemplate
-                                "
-                                class="col-12 col-md-6 col-lg-4 ps-0"
-                              >
-                                <app-form-field
-                                  [field]="field"
-                                  [form]="nomineeGroup"
-                                ></app-form-field>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div
-                        class="col-auto mt-2"
-                        *ngIf="
-                          getNestedFormGroupArray('families', i, 'childInsured')
-                            .length > 0
-                        "
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-outline btn-md"
-                          (click)="onButtonClick({ name: 'addChild' })"
-                        >
-                          <img
-                            src="/assets/icons/icon-add.svg"
-                            alt="Add Child"
-                            class="btn-icon"
-                          />
-                          <span>Add Child</span>
-                        </button>
-                      </div>
-                    </div>
-                  </ng-container>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-auto" *ngIf="subsection.name !== 'families'">
-              <button
-                type="button"
-                class="btn btn-outline btn-md"
-                (click)="addGroup(subsection)"
+              <div *ngIf="subsection.name === 'families'">
+                <div
+                  *ngFor="
+                    let group of getFormArray(subsection.name).controls;
+                    let i = index
+                  "
+                  class="form-array-group mb-lg"
+                >
+                  <div [formGroupName]="i" class="row gy-4 gx-5">
+                    <div
+                      class="col-12 d-flex justify-content-between align-items-center p-0"
+                    >
+                      <p class="text-base text-primary font-semibold mb-md">
+                        {{ subsection.title }} {{ i + 1 }}
+                      </p>
+                      <div
+                        class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                        *ngIf="i > 0"
+                        (click)="removeGroup(subsection, i)"
+                      >
+                        <img src="/assets/icons/icon-remove.svg" alt="" />
+                        <span class="ms-1">Remove</span>
+                      </div>
+                    </div>
+
+                    <div class="row gy-3 gx-3 mb-3">
+                      <div
+                        *ngFor="let field of subsection.formGroupTemplate"
+                        class="col-12 col-md-4 col-lg-"
+                      >
+                        <app-form-field
+                          [field]="field"
+                          [form]="group"
+                          (stepperChange)="onStepperChange($event)"
+                          (buttonClick)="onButtonClick($event)"
+                        ></app-form-field>
+                      </div>
+
+                      <div
+                        *ngIf="
+                          subsection.name === 'families' &&
+                          i === getFormArray(subsection.name).length - 1
+                        "
+                        class="col-12 col-md-4 col-lg-4"
+                      >
+                        <app-form-field
+                          [field]="{
+                            type: 'button',
+                            name: 'addMoreInsured',
+                            label: 'Add More Insured',
+                            buttonType: 'outline',
+                          }"
+                          [form]="form"
+                          (buttonClick)="onButtonClick($event)"
+                        ></app-form-field>
+                      </div>
+                    </div>
+                    `
+                    <ng-container *ngIf="subsection.name === 'families'">
+                      <div
+                        formArrayName="selfInsured"
+                        *ngIf="
+                          getFormGroupFromArray('families', i).get(
+                            'selfInsured'
+                          )
+                        "
+                        class="mt-3"
+                      >
+                        <div
+                          *ngFor="
+                            let selfGroup of getNestedFormGroupArray(
+                              'families',
+                              i,
+                              'selfInsured'
+                            );
+                            let j = index
+                          "
+                          [formGroupName]="j"
+                          class="form-array-group mb-lg"
+                        >
+                          <div
+                            class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
+                          >
+                            <p
+                              class="text-base text-primary font-semibold mb-md"
+                            >
+                              {{ subsection.subsections[0].title }}
+                              {{ j + 1 }}
+                            </p>
+                            <div
+                              class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                              (click)="
+                                removeNestedGroup(
+                                  'families',
+                                  i,
+                                  'selfInsured',
+                                  j
+                                )
+                              "
+                            >
+                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <span class="ms-1">Remove</span>
+                            </div>
+                          </div>
+
+                          <div class="row gy-4 gx-5">
+                            <div
+                              *ngFor="
+                                let field of subsection.subsections[0]
+                                  .formGroupTemplate
+                              "
+                              class="col-12 col-md-6 col-lg-4 ps-0"
+                            >
+                              <app-form-field
+                                [field]="field"
+                                [form]="selfGroup"
+                              ></app-form-field>
+                            </div>
+                          </div>
+
+                          <div
+                            formArrayName="nominees"
+                            *ngIf="selfGroup.get('nominees')"
+                            class="mt-3"
+                          >
+                            <div
+                              *ngFor="
+                                let nomineeGroup of getInnerFormGroupArray(
+                                  selfGroup,
+                                  'nominees'
+                                );
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                              class="form-array-group mb-lg"
+                            >
+                              <div class="row gy-4 gx-5">
+                                <div class="col-12 p-0">
+                                  <p
+                                    class="text-base text-blue-secondary font-semibold mb-md"
+                                  >
+                                    {{
+                                      subsection.subsections[0].subsections[0]
+                                        .title
+                                    }}
+                                  </p>
+                                </div>
+
+                                <div
+                                  *ngFor="
+                                    let field of subsection.subsections[0]
+                                      .subsections[0].formGroupTemplate
+                                  "
+                                  class="col-12 col-md-6 col-lg-4 ps-0"
+                                >
+                                  <app-form-field
+                                    [field]="field"
+                                    [form]="nomineeGroup"
+                                  ></app-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        formArrayName="spouseInsured"
+                        *ngIf="
+                          getFormGroupFromArray('families', i).get(
+                            'spouseInsured'
+                          )
+                        "
+                        class="mt-3"
+                      >
+                        <div
+                          *ngFor="
+                            let spouseGroup of getNestedFormGroupArray(
+                              'families',
+                              i,
+                              'spouseInsured'
+                            );
+                            let j = index
+                          "
+                          [formGroupName]="j"
+                          class="form-array-group mb-lg"
+                        >
+                          <div
+                            class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
+                          >
+                            <p
+                              class="text-base text-primary font-semibold mb-md"
+                            >
+                              {{ subsection.subsections[1].title }} {{ j + 1 }}
+                            </p>
+                            <div
+                              class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                              (click)="
+                                removeNestedGroup(
+                                  'families',
+                                  i,
+                                  'spouseInsured',
+                                  j
+                                )
+                              "
+                            >
+                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <span class="ms-1">Remove</span>
+                            </div>
+                          </div>
+
+                          <div class="row gy-4 gx-5">
+                            <div
+                              *ngFor="
+                                let field of subsection.subsections[1]
+                                  .formGroupTemplate
+                              "
+                              class="col-12 col-md-6 col-lg-4 ps-0"
+                            >
+                              <app-form-field
+                                [field]="field"
+                                [form]="spouseGroup"
+                              ></app-form-field>
+                            </div>
+                          </div>
+
+                          <div
+                            formArrayName="nominees"
+                            *ngIf="spouseGroup.get('nominees')"
+                            class="mt-3"
+                          >
+                            <div
+                              *ngFor="
+                                let nomineeGroup of getInnerFormGroupArray(
+                                  spouseGroup,
+                                  'nominees'
+                                );
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                              class="form-array-group mb-lg"
+                            >
+                              <div class="row gy-4 gx-5">
+                                <div class="col-12 p-0">
+                                  <p
+                                    class="text-base text-blue-secondary font-semibold mb-md"
+                                  >
+                                    {{
+                                      subsection.subsections[1].subsections[0]
+                                        .title
+                                    }}
+                                  </p>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-check mb-3">
+                                    <input
+                                      type="checkbox"
+                                      class="form-check-input"
+                                      formControlName="sameAsPrimary"
+                                      (change)="
+                                        onSameAsPrimaryChange(
+                                          nomineeGroup,
+                                          i,
+                                          'childInsured'
+                                        )
+                                      "
+                                    />
+
+                                    <label class="form-check-label"
+                                      >Same As Primary Insured</label
+                                    >
+                                  </div>
+                                </div>
+                                <div
+                                  *ngFor="
+                                    let field of subsection.subsections[1]
+                                      .subsections[0].formGroupTemplate
+                                  "
+                                  class="col-12 col-md-6 col-lg-4 ps-0"
+                                >
+                                  <app-form-field
+                                    [field]="field"
+                                    [form]="nomineeGroup"
+                                    (change)="
+                                      field.name === 'sameAsPrimary' &&
+                                        onSameAsPrimaryChange(
+                                          nomineeGroup,
+                                          i,
+                                          'spouseInsured'
+                                        )
+                                    "
+                                  ></app-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        formArrayName="childInsured"
+                        *ngIf="
+                          getFormGroupFromArray('families', i).get(
+                            'childInsured'
+                          )
+                        "
+                        class="mt-3"
+                      >
+                        <div
+                          *ngFor="
+                            let childGroup of getNestedFormGroupArray(
+                              'families',
+                              i,
+                              'childInsured'
+                            );
+                            let j = index
+                          "
+                          [formGroupName]="j"
+                          class="form-array-group mb-lg"
+                        >
+                          <div
+                            class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
+                          >
+                            <p
+                              class="text-base text-primary font-semibold mb-md"
+                            >
+                              {{ subsection.subsections[2].title }} {{ j + 1 }}
+                            </p>
+                            <div
+                              class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                              (click)="
+                                removeNestedGroup(
+                                  'families',
+                                  i,
+                                  'childInsured',
+                                  j
+                                )
+                              "
+                            >
+                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <span class="ms-1">Remove</span>
+                            </div>
+                          </div>
+
+                          <div class="row gy-4 gx-5">
+                            <div
+                              *ngFor="
+                                let field of subsection.subsections[2]
+                                  .formGroupTemplate
+                              "
+                              class="col-12 col-md-6 col-lg-4 ps-0"
+                            >
+                              <app-form-field
+                                [field]="field"
+                                [form]="childGroup"
+                              ></app-form-field>
+                            </div>
+                          </div>
+
+                          <div
+                            formArrayName="nominees"
+                            *ngIf="childGroup.get('nominees')"
+                            class="mt-3"
+                          >
+                            <div
+                              *ngFor="
+                                let nomineeGroup of getInnerFormGroupArray(
+                                  childGroup,
+                                  'nominees'
+                                );
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                              class="form-array-group mb-lg"
+                            >
+                              <div class="row gy-4 gx-5">
+                                <div
+                                  class="col-12 d-flex justify-content-between align-items-center p-0"
+                                >
+                                  <p
+                                    class="text-base text-blue-secondary font-semibold mb-md"
+                                  >
+                                    {{
+                                      subsection.subsections[2].subsections[0]
+                                        .title
+                                    }}
+                                  </p>
+                                </div>
+
+                                <div class="col-12">
+                                  <div class="form-check mb-3">
+                                    <input
+                                      type="checkbox"
+                                      class="form-check-input"
+                                      formControlName="sameAsPrimary"
+                                      (change)="
+                                        onSameAsPrimaryChange(
+                                          nomineeGroup,
+                                          i,
+                                          'childInsured'
+                                        )
+                                      "
+                                    />
+                                    <label class="form-check-label"
+                                      >Same As Primary Insured</label
+                                    >
+                                  </div>
+                                </div>
+
+                                <div
+                                  *ngFor="
+                                    let field of subsection.subsections[2]
+                                      .subsections[0].formGroupTemplate
+                                  "
+                                  class="col-12 col-md-6 col-lg-4 ps-0"
+                                >
+                                  <app-form-field
+                                    [field]="field"
+                                    [form]="nomineeGroup"
+                                  ></app-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="col-auto mt-2"
+                          *ngIf="
+                            getNestedFormGroupArray(
+                              'families',
+                              i,
+                              'childInsured'
+                            ).length > 0
+                          "
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-md"
+                            (click)="onButtonClick({ name: 'addChild' })"
+                          >
+                            <img
+                              src="/assets/icons/icon-add.svg"
+                              alt="Add Child"
+                              class="btn-icon"
+                            />
+                            <span>Add Child</span>
+                          </button>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-auto"
+                *ngIf="
+                  subsection.name !== 'families' &&
+                  subsection.name !== 'individuals'
+                "
               >
-                <img
-                  src="/assets/icons/icon-add.svg"
-                  [alt]="subsection.addButtonLabel"
-                  class="btn-icon"
-                />
-                <span>{{ subsection.addButtonLabel }}</span>
-              </button>
+                <button
+                  type="button"
+                  class="btn btn-outline btn-md"
+                  (click)="addGroup(subsection)"
+                >
+                  <img
+                    src="/assets/icons/icon-add.svg"
+                    [alt]="subsection.addButtonLabel"
+                    class="btn-icon"
+                  />
+                  <span>{{ subsection.addButtonLabel }}</span>
+                </button>
+              </div>
             </div>
           </ng-container>
 
