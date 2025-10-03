@@ -3,7 +3,7 @@
   "breadCrumbs": [
     { "title": "Dashboard", "link": "/dashBoard" },
     { "title": "Travel", "link": "/travel" },
-    { "title": "New Quote", "link": "/newQuote" }
+    { "title": "New Quote", "link": "/newQuote", "isActive":true }
   ],
   "sections": [
     {

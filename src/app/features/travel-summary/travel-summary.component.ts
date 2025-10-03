@@ -41,7 +41,7 @@ export class TravelSummaryComponent {
     alert('Transaction completed!');
   }
   goToApp() {
-    window.location.href = 'http://localhost:8902';
+    window.location.href = 'https://d2fciuteqrodiu.cloudfront.net/payment/index.html';
   }
 
   viewBreakup() {

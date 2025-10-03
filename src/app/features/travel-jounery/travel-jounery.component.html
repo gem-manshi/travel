@@ -1,28 +1,20 @@
 <div class="app-wrapper">
-  <div *ngIf="config" class="p-5 app-content">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li
-          *ngFor="let breadCrumb of config.breadCrumbs; let last = last"
-          class="d-flex align-items-center"
-          [class.active]="last"
-        >
-          <a *ngIf="!last" [routerLink]="breadCrumb.link" class="crumb">
-            {{ breadCrumb.title }}
-          </a>
-          <span *ngIf="last">{{ breadCrumb.title }}</span>
-
-          <i
-            *ngIf="!last"
-            class="bi bi-chevron-right mx-2 text-muted"
-            aria-hidden="true"
-          ></i>
-        </li>
-      </ol>
-    </nav>
+  <div *ngIf="config" class="p-4 app-content">
+    
+    <nav class="breadcrumbs">
+  <div class="breadcrumbs-item" *ngFor="let item of config.breadCrumbs; let last = last">
+    <a
+      [routerLink]="item.link"
+      [ngClass]="{ current: item.isActive }"
+      class="crumb"
+    >
+      {{ item.title }}
+    </a>
+  </div>
+</nav>
 
     <div class="form-title mb-3">
-      <h5>{{ config.title }}</h5>
+      <div class="page-title">{{ config.title }}</div>
     </div>
     <ng-container *ngFor="let section of config.sections">
       <section
@@ -782,9 +774,45 @@
         </div>
       </section>
     </ng-container>
+
+    <div *ngIf="getPremiumClicked" class="card-css" style="margin-top:12px !important">
+    <div
+      class="card-header-css d-flex justify-content-between align-items-center" style="padding: 16px !important;"
+    >
+      <h5 class="card-title">Total Premium ₹ 4,856.00</h5>
+    </div>
+
+    <div class="details-css ">
+      <div class="pt-3" style="width: 100% !important;">
+        <h6 class="detail-title">Premium Breakup</h6>
+        <div class="row mx-md">
+          <div class="col-3 mb-3">
+            <div class="detail-label">Premium Excluding Terrorism</div>
+            <div class="detail-value">₹ 4,000.00</div>
+          </div>
+          <div class="col-3 mb-3">
+            <div class="detail-label">Terrorism Premium</div>
+            <div class="detail-value">₹ 115.50</div>
+          </div>
+          <div class="col-3 mb-3">
+            <div class="detail-label">Gross Premium</div>
+            <div class="detail-value">₹ 4,115.50</div>
+          </div>
+          <div class="col-3 mb-3">
+            <div class="detail-label">IGST 18%</div>
+            <div class="detail-value">₹ 740.79</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
   </div>
 </div>
-<footer footer class="sticky-bottom footer-css">
+
+
+
+<div style="display: flex !important; justify-content: end !important;" class="p-4">
   <div
     class="containers d-flex flex-wrap justify-content-between align-items-center"
   >
@@ -808,23 +836,6 @@
       </button>
     </div>
 
-    <div
-      *ngIf="getPremiumClicked"
-      class="summary d-flex align-items-center justify-content-start flex-shrink-0 ml-auto"
-      style="min-width: 250px"
-    >
-      <div class="d-flex flex-column">
-        <span class="text-h3-semibold">Total Premium</span>
-        <a
-          class="text-primary small text-decoration-underline"
-          style="cursor: pointer"
-          (click)="viewBreakup()"
-        >
-          View Breakup
-        </a>
-      </div>
-      <div style="border-left: 3px solid #8cb8ff; height: 40px"></div>
-      <span class="text-h3-semibold"> ₹ 4,856.00 </span>
-    </div>
+    
   </div>
-</footer>
+</div>
