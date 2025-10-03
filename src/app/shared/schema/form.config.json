@@ -1342,6 +1342,47 @@
           ]
         }
       ]
+    },
+    {
+      "title": "Premium Details",
+      "type": "premiumDetails",
+      "componentType": "standard",
+      "isCollapsible": false,
+      "isExpandedByDefault": true,
+      "showOnNext": true,
+      "subsections": [
+        {
+          "title": "Premium Breakup",
+          "fields": [
+            {
+              "type": "label",
+              "name": "premiumExcludingTerrorism",
+              "label": "Premium Excluding Terrorism"
+            },
+            {
+              "type": "label",
+              "name": "terrorismPremium",
+              "label": "Terrorism Premium"
+            },
+            {
+              "type": "label",
+              "name": "grossPremium",
+              "label": "Gross Premium"
+            },
+            {
+              "type": "label",
+              "name": "igst",
+              "label": "IGST 18%"
+            },
+            {
+              "type": "label",
+              "name": "totalPremium",
+              "label": "Total Premium",
+              "class": "font-bold text-lg text-primary"
+            }
+          ]
+        }
+      ]
     }
   ],
   "submitButton": { "label": "Get Premium", "style": "primary" }

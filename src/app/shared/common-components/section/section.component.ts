@@ -32,7 +32,7 @@ export class SectionComponent implements OnInit {
     private fb: FormBuilder,
   ) {}
   isExpanded = true;
-
+  showPremiumBreakup = false;
   get familiesArray(): FormArray {
     return this.form.get('families') as FormArray;
   }
@@ -565,5 +565,9 @@ export class SectionComponent implements OnInit {
         familyCountCtrl.setValue(formArray.length);
       }
     }
+  }
+
+  onNextClick() {
+    this.showPremiumBreakup = true;
   }
 }

@@ -1,0 +1,12 @@
+<div class="details-css">
+  <div class="pt-3" style="width: 100% !important">
+    <h6 class="detail-title">{{ title }}</h6>
+
+    <div class="row mx-md">
+      <div class="col-3 mb-3" *ngFor="let item of breakupData">
+        <div class="detail-label">{{ item.label }}</div>
+        <div class="detail-value">₹ {{ item.value }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,7 +33,44 @@ export class TravelJourneyComponent {
   form!: FormGroup;
   sectionState = new Map<string, boolean>();
   private offcanvasService = inject(NgbOffcanvas);
-
+  showPremiumBreakup = false;
+  premiumBreakupSection = {
+    title: 'Premium Breakup',
+    type: 'premiumBreakup',
+    isCollapsible: true,
+    isExpandedByDefault: true,
+    subsections: [
+      {
+        title: 'Premium Breakup',
+        fields: [
+          {
+            type: 'label',
+            name: 'premiumExcludingTerrorism',
+            label: 'Premium Excluding Terrorism',
+            value: '₹ 4,000.00',
+          },
+          {
+            type: 'label',
+            name: 'terrorismPremium',
+            label: 'Terrorism Premium',
+            value: '₹ 115.50',
+          },
+          {
+            type: 'label',
+            name: 'grossPremium',
+            label: 'Gross Premium',
+            value: '₹ 4,115.50',
+          },
+          {
+            type: 'label',
+            name: 'igst',
+            label: 'IGST 18%',
+            value: '₹ 740.79',
+          },
+        ],
+      },
+    ],
+  };
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -123,5 +160,9 @@ export class TravelJourneyComponent {
     this.router.navigate(['cpm-review'], {
       state: { isProposal: false },
     });
+  }
+
+  onNextClick() {
+    this.showPremiumBreakup = true; // 👈 show it on next click
   }
 }

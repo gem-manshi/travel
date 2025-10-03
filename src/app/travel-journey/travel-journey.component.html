@@ -4,9 +4,21 @@
     <div class="page-title">{{ config.title }}</div>
     <div *ngIf="form">
       <form [formGroup]="form">
+        <ng-container *ngFor="let section of config.sections">
+          <app-section
+            *ngIf="section.type !== 'premiumBreakup'"
+            [section]="section"
+            [form]="form"
+            (buttonClick)="handleButtonClick($event)"
+            [personFields]="config.personFields || []"
+            [nomineeFields]="config.nomineeFields || []"
+          >
+          </app-section>
+        </ng-container>
+
         <app-section
-          *ngFor="let section of config.sections"
-          [section]="section"
+          *ngIf="showPremiumBreakup"
+          [section]="premiumBreakupSection"
           [form]="form"
           (buttonClick)="handleButtonClick($event)"
           [personFields]="config.personFields || []"
@@ -17,13 +29,13 @@
     </div>
   </div>
 
-  <footer
-    class="page-footer bg-white shadow-md d-flex justify-content-between ps-2"
-  >
-    <div class="d-flex align-items-center gap-3 p-3">
-      <button class="btn btn-primary btn-md px-5" (click)="redirect()">
-        Submit
-      </button>
-    </div>
-  </footer>
+  <div class="sticky-next-btn">
+    <button
+      type="button"
+      class="btn btn-primary btn-md"
+      (click)="onNextClick()"
+    >
+      Get Premium
+    </button>
+  </div>
 </div>

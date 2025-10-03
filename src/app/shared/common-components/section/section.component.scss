@@ -18,3 +18,50 @@
   flex: unset !important;
   width: auto !important;
 }
+.premium-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.premium-row {
+  flex: 1 1 calc(50% - 1rem); // two columns
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+
+.premium-row:last-child {
+  border-bottom: none;
+}
+
+.premium-label {
+  font-weight: 500;
+  color: #444;
+}
+
+.premium-value {
+  font-weight: 600;
+  color: #000;
+}
+
+.total-premium .premium-value {
+  font-size: 16px;
+  color: #0066ff;
+}
+.sticky-next-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; // ensures it stays above other elements
+}
+
+.sticky-next-btn .btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+}

@@ -1,4 +1,8 @@
-<section class="section-card mb-4" [formGroup]="form">
+<section
+  class="section-card mb-4"
+  [formGroup]="form"
+  *ngIf="section.type !== 'premiumDetails'"
+>
   <div
     class="card-header"
     [ngClass]="{ accordian: isCollapsible, collapsed: !isExpanded }"
