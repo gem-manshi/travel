@@ -27,8 +27,9 @@
               "type": "button",
               "name": "createCertificate",
               "label": "Create Certificate",
-              "iconPath": "assets/icons/add-certi.svg",
-              "buttonType": "outline"
+              "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/add-certi.svg",
+              "buttonType": "outline",
+              "class": "policy-details-btn"
             }
           ]
         }
@@ -212,9 +213,10 @@
         },
         {
           "type": "form-array",
-          "title": "Departure Flight",
+          "title": "Departure Flights",
           "name": "departureFlights",
           "addButtonLabel": "Add Connecting Flight",
+          "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg",
           "formGroupTemplate": [
             {
               "type": "select",
@@ -363,7 +365,11 @@
           "type": "form-array",
           "name": "returnFlights",
           "addButtonLabel": "Add Return Flight",
-
+          "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg",
+          "showWhen": {
+            "field": "returnJourney",
+            "value": true
+          },
           "formGroupTemplate": [
             {
               "type": "select",
@@ -374,40 +380,57 @@
                 { "key": "delhi", "name": "Delhi" },
                 { "key": "mumbai", "name": "Mumbai" },
                 { "key": "london", "name": "London" }
-              ]
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Start From is required" }
             },
             {
-              "type": "input",
-              "name": "flightNumber",
-              "label": "Flight Number",
-              "placeholder": "Enter flight number"
+              "type": "select",
+              "name": "journeyDestination",
+              "label": "Journey Destination/Halt",
+              "placeholder": "Select destination/halt",
+              "options": [
+                { "key": "delhi", "name": "Delhi" },
+                { "key": "mumbai", "name": "Mumbai" },
+                { "key": "london", "name": "London" }
+              ],
+              "validators": { "required": true },
+              "errors": { "required": "Journey Destination/Halt is required" }
             },
             {
               "type": "datepicker",
               "name": "flightDate",
               "label": "Flight Date",
-              "placeholder": "Select flight date"
+              "placeholder": "Select flight date",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Date is required" }
             },
             {
               "type": "input",
               "inputType": "text",
               "name": "flightNumber",
               "label": "Flight Number",
-              "placeholder": "Enter flight number"
+              "placeholder": "Enter flight number",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Number is required" }
             },
             {
               "type": "input",
               "inputType": "text",
               "name": "flightName",
               "label": "Flight Name",
-              "placeholder": "Enter flight name"
+              "placeholder": "Enter flight name",
+              "validators": { "required": true },
+              "errors": { "required": "Flight Name is required" }
             },
             {
               "type": "input",
               "inputType": "text",
               "name": "pnrNumber",
               "label": "PNR Number",
-              "placeholder": "Enter PNR number"
+              "placeholder": "Enter PNR number",
+              "validators": { "required": true },
+              "errors": { "required": "PNR Number is required" }
             }
           ]
         }
@@ -437,7 +460,6 @@
             {
               "type": "stepper",
               "name": "familyCount",
-              "label": "Family Count",
               "value": 1,
               "min": 0,
               "max": 10,
@@ -450,7 +472,6 @@
             {
               "type": "stepper",
               "name": "individualCount",
-              "label": "Individual Count",
               "value": 1,
               "min": 1,
               "max": 10,
@@ -472,19 +493,22 @@
               "type": "button",
               "name": "addSelf",
               "label": "Add Self",
-              "buttonType": "outline"
+              "buttonType": "outline",
+              "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
             },
             {
               "type": "button",
               "name": "addSpouse",
               "label": "Add Spouse",
-              "buttonType": "outline"
+              "buttonType": "outline",
+              "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
             },
             {
               "type": "button",
               "name": "addChild",
               "label": "Add Child",
-              "buttonType": "outline"
+              "buttonType": "outline",
+              "iconPath": "https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
             }
           ],
           "subsections": [
@@ -608,6 +632,280 @@
                       "type": "select",
                       "name": "relationship",
                       "label": "Relationship with Insured Person",
+                      "placeholder": "Select relationship",
+                      "options": [
+                        { "key": "spouse", "name": "Spouse" },
+                        { "key": "child", "name": "Child" },
+                        { "key": "parent", "name": "Parent" }
+                      ]
+                    },
+                    {
+                      "type": "input",
+                      "name": "nomineeAddress",
+                      "label": "Address",
+                      "placeholder": "Enter address"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Spouse Insured",
+              "name": "spouseInsured",
+              "type": "form-array",
+              "formGroupTemplate": [
+                {
+                  "type": "input",
+                  "name": "employeeId",
+                  "label": "Employee / Unique ID",
+                  "placeholder": "Enter employee / unique ID"
+                },
+                {
+                  "type": "input",
+                  "name": "firstName",
+                  "label": "First Name",
+                  "placeholder": "Enter first name"
+                },
+                {
+                  "type": "input",
+                  "name": "lastName",
+                  "label": "Last Name",
+                  "placeholder": "Enter last name"
+                },
+                {
+                  "type": "input",
+                  "name": "email",
+                  "label": "Email ID",
+                  "placeholder": "Enter email ID"
+                },
+                {
+                  "type": "datepicker",
+                  "name": "dob",
+                  "label": "Date of Birth",
+                  "placeholder": "Select date of birth"
+                },
+                {
+                  "type": "select",
+                  "name": "gender",
+                  "label": "Gender",
+                  "placeholder": "Select gender",
+                  "options": [
+                    { "key": "male", "name": "Male" },
+                    { "key": "female", "name": "Female" }
+                  ]
+                },
+                {
+                  "type": "input",
+                  "name": "mobile",
+                  "label": "Mobile Number",
+                  "placeholder": "Enter mobile number"
+                },
+                {
+                  "type": "input",
+                  "name": "passport",
+                  "label": "Passport Number",
+                  "placeholder": "Enter passport number"
+                },
+                {
+                  "type": "input",
+                  "name": "pan",
+                  "label": "PAN Number",
+                  "placeholder": "Enter PAN number"
+                },
+                {
+                  "type": "input",
+                  "name": "pincode",
+                  "label": "Pincode",
+                  "placeholder": "Enter pincode"
+                },
+                {
+                  "type": "input",
+                  "name": "address1",
+                  "label": "Address 1",
+                  "placeholder": "Enter address 1"
+                },
+                {
+                  "type": "input",
+                  "name": "address2",
+                  "label": "Address 2",
+                  "placeholder": "Enter address 2"
+                },
+                {
+                  "type": "input",
+                  "name": "address3",
+                  "label": "Address 3",
+                  "placeholder": "Enter address 3"
+                }
+              ],
+              "subsections": [
+                {
+                  "title": "Nominee Details",
+                  "name": "nominees",
+                  "type": "form-array",
+                  "formGroupTemplate": [
+                    {
+                      "type": "input",
+                      "name": "nomineeName",
+                      "label": "Name",
+                      "placeholder": "Enter name"
+                    },
+                    {
+                      "type": "datepicker",
+                      "name": "nomineeDob",
+                      "label": "Date of Birth",
+                      "placeholder": "Select date of birth"
+                    },
+                    {
+                      "type": "select",
+                      "name": "nomineeGender",
+                      "label": "Gender",
+                      "placeholder": "Select gender",
+                      "options": [
+                        { "key": "male", "name": "Male" },
+                        { "key": "female", "name": "Female" }
+                      ]
+                    },
+                    {
+                      "type": "select",
+                      "name": "relationship",
+                      "label": "Relationship",
+                      "placeholder": "Select relationship",
+                      "options": [
+                        { "key": "spouse", "name": "Spouse" },
+                        { "key": "child", "name": "Child" },
+                        { "key": "parent", "name": "Parent" }
+                      ]
+                    },
+                    {
+                      "type": "input",
+                      "name": "nomineeAddress",
+                      "label": "Address",
+                      "placeholder": "Enter address"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Child Insured",
+              "name": "childInsured",
+              "type": "form-array",
+              "formGroupTemplate": [
+                {
+                  "type": "input",
+                  "name": "employeeId",
+                  "label": "Employee / Unique ID",
+                  "placeholder": "Enter employee / unique ID"
+                },
+                {
+                  "type": "input",
+                  "name": "firstName",
+                  "label": "First Name",
+                  "placeholder": "Enter first name"
+                },
+                {
+                  "type": "input",
+                  "name": "lastName",
+                  "label": "Last Name",
+                  "placeholder": "Enter last name"
+                },
+                {
+                  "type": "input",
+                  "name": "email",
+                  "label": "Email ID",
+                  "placeholder": "Enter email ID"
+                },
+                {
+                  "type": "datepicker",
+                  "name": "dob",
+                  "label": "Date of Birth",
+                  "placeholder": "Select date of birth"
+                },
+                {
+                  "type": "select",
+                  "name": "gender",
+                  "label": "Gender",
+                  "placeholder": "Select gender",
+                  "options": [
+                    { "key": "male", "name": "Male" },
+                    { "key": "female", "name": "Female" }
+                  ]
+                },
+                {
+                  "type": "input",
+                  "name": "mobile",
+                  "label": "Mobile Number",
+                  "placeholder": "Enter mobile number"
+                },
+                {
+                  "type": "input",
+                  "name": "passport",
+                  "label": "Passport Number",
+                  "placeholder": "Enter passport number"
+                },
+                {
+                  "type": "input",
+                  "name": "pan",
+                  "label": "PAN Number",
+                  "placeholder": "Enter PAN number"
+                },
+                {
+                  "type": "input",
+                  "name": "pincode",
+                  "label": "Pincode",
+                  "placeholder": "Enter pincode"
+                },
+                {
+                  "type": "input",
+                  "name": "address1",
+                  "label": "Address 1",
+                  "placeholder": "Enter address 1"
+                },
+                {
+                  "type": "input",
+                  "name": "address2",
+                  "label": "Address 2",
+                  "placeholder": "Enter address 2"
+                },
+                {
+                  "type": "input",
+                  "name": "address3",
+                  "label": "Address 3",
+                  "placeholder": "Enter address 3"
+                }
+              ],
+              "subsections": [
+                {
+                  "title": "Nominee Details",
+                  "name": "nominees",
+                  "type": "form-array",
+                  "formGroupTemplate": [
+                    {
+                      "type": "input",
+                      "name": "nomineeName",
+                      "label": "Name",
+                      "placeholder": "Enter name"
+                    },
+                    {
+                      "type": "datepicker",
+                      "name": "nomineeDob",
+                      "label": "Date of Birth",
+                      "placeholder": "Select date of birth"
+                    },
+                    {
+                      "type": "select",
+                      "name": "nomineeGender",
+                      "label": "Gender",
+                      "placeholder": "Select gender",
+                      "options": [
+                        { "key": "male", "name": "Male" },
+                        { "key": "female", "name": "Female" }
+                      ]
+                    },
+                    {
+                      "type": "select",
+                      "name": "relationship",
+                      "label": "Relationship",
                       "placeholder": "Select relationship",
                       "options": [
                         { "key": "spouse", "name": "Spouse" },
@@ -764,6 +1062,280 @@
                   "name": "nomineeAddress",
                   "label": "Address",
                   "placeholder": "Enter address"
+                }
+              ]
+            },
+            {
+              "title": "Spouse Insured",
+              "name": "spouseInsured",
+              "type": "form-array",
+              "formGroupTemplate": [
+                {
+                  "type": "input",
+                  "name": "employeeId",
+                  "label": "Employee / Unique ID",
+                  "placeholder": "Enter employee / unique ID"
+                },
+                {
+                  "type": "input",
+                  "name": "firstName",
+                  "label": "First Name",
+                  "placeholder": "Enter first name"
+                },
+                {
+                  "type": "input",
+                  "name": "lastName",
+                  "label": "Last Name",
+                  "placeholder": "Enter last name"
+                },
+                {
+                  "type": "input",
+                  "name": "email",
+                  "label": "Email ID",
+                  "placeholder": "Enter email ID"
+                },
+                {
+                  "type": "datepicker",
+                  "name": "dob",
+                  "label": "Date of Birth",
+                  "placeholder": "Select date of birth"
+                },
+                {
+                  "type": "select",
+                  "name": "gender",
+                  "label": "Gender",
+                  "placeholder": "Select gender",
+                  "options": [
+                    { "key": "male", "name": "Male" },
+                    { "key": "female", "name": "Female" }
+                  ]
+                },
+                {
+                  "type": "input",
+                  "name": "mobile",
+                  "label": "Mobile Number",
+                  "placeholder": "Enter mobile number"
+                },
+                {
+                  "type": "input",
+                  "name": "passport",
+                  "label": "Passport Number",
+                  "placeholder": "Enter passport number"
+                },
+                {
+                  "type": "input",
+                  "name": "pan",
+                  "label": "PAN Number",
+                  "placeholder": "Enter PAN number"
+                },
+                {
+                  "type": "input",
+                  "name": "pincode",
+                  "label": "Pincode",
+                  "placeholder": "Enter pincode"
+                },
+                {
+                  "type": "input",
+                  "name": "address1",
+                  "label": "Address 1",
+                  "placeholder": "Enter address 1"
+                },
+                {
+                  "type": "input",
+                  "name": "address2",
+                  "label": "Address 2",
+                  "placeholder": "Enter address 2"
+                },
+                {
+                  "type": "input",
+                  "name": "address3",
+                  "label": "Address 3",
+                  "placeholder": "Enter address 3"
+                }
+              ],
+              "subsections": [
+                {
+                  "title": "Nominee Details",
+                  "name": "nominees",
+                  "type": "form-array",
+                  "formGroupTemplate": [
+                    {
+                      "type": "input",
+                      "name": "nomineeName",
+                      "label": "Name",
+                      "placeholder": "Enter name"
+                    },
+                    {
+                      "type": "datepicker",
+                      "name": "nomineeDob",
+                      "label": "Date of Birth",
+                      "placeholder": "Select date of birth"
+                    },
+                    {
+                      "type": "select",
+                      "name": "nomineeGender",
+                      "label": "Gender",
+                      "placeholder": "Select gender",
+                      "options": [
+                        { "key": "male", "name": "Male" },
+                        { "key": "female", "name": "Female" }
+                      ]
+                    },
+                    {
+                      "type": "select",
+                      "name": "relationship",
+                      "label": "Relationship",
+                      "placeholder": "Select relationship",
+                      "options": [
+                        { "key": "spouse", "name": "Spouse" },
+                        { "key": "child", "name": "Child" },
+                        { "key": "parent", "name": "Parent" }
+                      ]
+                    },
+                    {
+                      "type": "input",
+                      "name": "nomineeAddress",
+                      "label": "Address",
+                      "placeholder": "Enter address"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Child Insured",
+              "name": "childInsured",
+              "type": "form-array",
+              "formGroupTemplate": [
+                {
+                  "type": "input",
+                  "name": "employeeId",
+                  "label": "Employee / Unique ID",
+                  "placeholder": "Enter employee / unique ID"
+                },
+                {
+                  "type": "input",
+                  "name": "firstName",
+                  "label": "First Name",
+                  "placeholder": "Enter first name"
+                },
+                {
+                  "type": "input",
+                  "name": "lastName",
+                  "label": "Last Name",
+                  "placeholder": "Enter last name"
+                },
+                {
+                  "type": "input",
+                  "name": "email",
+                  "label": "Email ID",
+                  "placeholder": "Enter email ID"
+                },
+                {
+                  "type": "datepicker",
+                  "name": "dob",
+                  "label": "Date of Birth",
+                  "placeholder": "Select date of birth"
+                },
+                {
+                  "type": "select",
+                  "name": "gender",
+                  "label": "Gender",
+                  "placeholder": "Select gender",
+                  "options": [
+                    { "key": "male", "name": "Male" },
+                    { "key": "female", "name": "Female" }
+                  ]
+                },
+                {
+                  "type": "input",
+                  "name": "mobile",
+                  "label": "Mobile Number",
+                  "placeholder": "Enter mobile number"
+                },
+                {
+                  "type": "input",
+                  "name": "passport",
+                  "label": "Passport Number",
+                  "placeholder": "Enter passport number"
+                },
+                {
+                  "type": "input",
+                  "name": "pan",
+                  "label": "PAN Number",
+                  "placeholder": "Enter PAN number"
+                },
+                {
+                  "type": "input",
+                  "name": "pincode",
+                  "label": "Pincode",
+                  "placeholder": "Enter pincode"
+                },
+                {
+                  "type": "input",
+                  "name": "address1",
+                  "label": "Address 1",
+                  "placeholder": "Enter address 1"
+                },
+                {
+                  "type": "input",
+                  "name": "address2",
+                  "label": "Address 2",
+                  "placeholder": "Enter address 2"
+                },
+                {
+                  "type": "input",
+                  "name": "address3",
+                  "label": "Address 3",
+                  "placeholder": "Enter address 3"
+                }
+              ],
+              "subsections": [
+                {
+                  "title": "Nominee Details",
+                  "name": "nominees",
+                  "type": "form-array",
+                  "formGroupTemplate": [
+                    {
+                      "type": "input",
+                      "name": "nomineeName",
+                      "label": "Name",
+                      "placeholder": "Enter name"
+                    },
+                    {
+                      "type": "datepicker",
+                      "name": "nomineeDob",
+                      "label": "Date of Birth",
+                      "placeholder": "Select date of birth"
+                    },
+                    {
+                      "type": "select",
+                      "name": "nomineeGender",
+                      "label": "Gender",
+                      "placeholder": "Select gender",
+                      "options": [
+                        { "key": "male", "name": "Male" },
+                        { "key": "female", "name": "Female" }
+                      ]
+                    },
+                    {
+                      "type": "select",
+                      "name": "relationship",
+                      "label": "Relationship",
+                      "placeholder": "Select relationship",
+                      "options": [
+                        { "key": "spouse", "name": "Spouse" },
+                        { "key": "child", "name": "Child" },
+                        { "key": "parent", "name": "Parent" }
+                      ]
+                    },
+                    {
+                      "type": "input",
+                      "name": "nomineeAddress",
+                      "label": "Address",
+                      "placeholder": "Enter address"
+                    }
+                  ]
                 }
               ]
             }

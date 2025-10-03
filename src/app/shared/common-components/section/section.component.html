@@ -55,7 +55,10 @@
                       *ngIf="i"
                       (click)="removeGroup(subsection, i)"
                     >
-                      <img src="/assets/icons/icon-remove.svg" alt="remove" />
+                      <img
+                        src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                        alt="remove"
+                      />
                       <span class="ms-1">Remove</span>
                     </div>
                   </div>
@@ -64,6 +67,7 @@
                     <div
                       *ngFor="let field of subsection.formGroupTemplate"
                       class="col-12 col-md-6 col-lg-4 ps-0"
+                      [ngClass]="field.class"
                     >
                       <app-form-field
                         [field]="field"
@@ -97,8 +101,10 @@
                         </div>
                         <div
                           *ngFor="
-                            let field of subsection.subsections[0]
-                              .formGroupTemplate
+                            let field of getSubsectionConfig(
+                              subsection,
+                              'nominees'
+                            )?.formGroupTemplate
                           "
                           class="col-12 col-md-6 col-lg-4 ps-0"
                         >
@@ -109,6 +115,300 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div
+                    formArrayName="spouseInsured"
+                    *ngIf="
+                      getFormGroupFromArray('individuals', i).get(
+                        'spouseInsured'
+                      )
+                    "
+                    class="mt-3"
+                  >
+                    <div
+                      *ngFor="
+                        let spouseGroup of getNestedFormGroupArray(
+                          'individuals',
+                          i,
+                          'spouseInsured'
+                        );
+                        let j = index
+                      "
+                      [formGroupName]="j"
+                      class="form-array-group mb-lg"
+                    >
+                      <div
+                        class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
+                      >
+                        <p class="text-base text-primary font-semibold mb-md">
+                          Spouse Insured {{ j + 1 }}
+                        </p>
+                        <div
+                          class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                          (click)="
+                            removeNestedGroup(
+                              'individuals',
+                              i,
+                              'spouseInsured',
+                              j
+                            )
+                          "
+                        >
+                          <img
+                            src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                            alt=""
+                          />
+                          <span class="ms-1">Remove</span>
+                        </div>
+                      </div>
+
+                      <div class="row gy-4 gx-5">
+                        <div
+                          *ngFor="
+                            let field of getSubsectionConfig(
+                              subsection,
+                              'spouseInsured'
+                            )?.formGroupTemplate
+                          "
+                          class="col-12 col-md-6 col-lg-4 ps-0"
+                        >
+                          <app-form-field
+                            [field]="field"
+                            [form]="spouseGroup"
+                          ></app-form-field>
+                        </div>
+                      </div>
+
+                      <div
+                        formArrayName="nominees"
+                        *ngIf="spouseGroup.get('nominees')"
+                        class="mt-3"
+                      >
+                        <div
+                          *ngFor="
+                            let nomineeGroup of getInnerFormGroupArray(
+                              spouseGroup,
+                              'nominees'
+                            );
+                            let k = index
+                          "
+                          [formGroupName]="k"
+                          class="form-array-group mb-lg"
+                        >
+                          <div class="row gy-4 gx-5">
+                            <div class="col-12 p-0">
+                              <p
+                                class="text-base text-blue-secondary font-semibold mb-md"
+                              >
+                                Nominee Details
+                              </p>
+                            </div>
+
+                            <div class="col-12">
+                              <div class="form-check mb-3">
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input"
+                                  formControlName="sameAsPrimary"
+                                  (change)="
+                                    onSameAsPrimaryChangeIndividual(
+                                      nomineeGroup,
+                                      i,
+                                      'spouseInsured'
+                                    )
+                                  "
+                                />
+                                <label class="form-check-label"
+                                  >Same As Primary Insured</label
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              *ngFor="
+                                let field of getSubsectionConfig(
+                                  getSubsectionConfig(
+                                    subsection,
+                                    'spouseInsured'
+                                  ),
+                                  'nominees'
+                                )?.formGroupTemplate
+                              "
+                              class="col-12 col-md-6 col-lg-4 ps-0"
+                            >
+                              <app-form-field
+                                [field]="field"
+                                [form]="nomineeGroup"
+                              ></app-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    formArrayName="childInsured"
+                    *ngIf="
+                      getFormGroupFromArray('individuals', i).get(
+                        'childInsured'
+                      )
+                    "
+                    class="mt-3"
+                  >
+                    <div
+                      *ngFor="
+                        let childGroup of getNestedFormGroupArray(
+                          'individuals',
+                          i,
+                          'childInsured'
+                        );
+                        let j = index
+                      "
+                      [formGroupName]="j"
+                      class="form-array-group mb-lg"
+                    >
+                      <div
+                        class="col-12 d-flex justify-content-between align-items-center p-0 mb-2"
+                      >
+                        <p class="text-base text-primary font-semibold mb-md">
+                          Child Insured {{ j + 1 }}
+                        </p>
+                        <div
+                          class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                          (click)="
+                            removeNestedGroup(
+                              'individuals',
+                              i,
+                              'childInsured',
+                              j
+                            )
+                          "
+                        >
+                          <img
+                            src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                            alt=""
+                          />
+                          <span class="ms-1">Remove</span>
+                        </div>
+                      </div>
+
+                      <div class="row gy-4 gx-5">
+                        <div
+                          *ngFor="
+                            let field of getSubsectionConfig(
+                              subsection,
+                              'childInsured'
+                            )?.formGroupTemplate
+                          "
+                          class="col-12 col-md-6 col-lg-4 ps-0"
+                        >
+                          <app-form-field
+                            [field]="field"
+                            [form]="childGroup"
+                          ></app-form-field>
+                        </div>
+                      </div>
+
+                      <div
+                        formArrayName="nominees"
+                        *ngIf="childGroup.get('nominees')"
+                        class="mt-3"
+                      >
+                        <div
+                          *ngFor="
+                            let nomineeGroup of getInnerFormGroupArray(
+                              childGroup,
+                              'nominees'
+                            );
+                            let k = index
+                          "
+                          [formGroupName]="k"
+                          class="form-array-group mb-lg"
+                        >
+                          <div class="row gy-4 gx-5">
+                            <div class="col-12 p-0">
+                              <p
+                                class="text-base text-blue-secondary font-semibold mb-md"
+                              >
+                                Nominee Details
+                              </p>
+                            </div>
+
+                            <div class="col-12">
+                              <div class="form-check mb-3">
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input"
+                                  formControlName="sameAsPrimary"
+                                  (change)="
+                                    onSameAsPrimaryChangeIndividual(
+                                      nomineeGroup,
+                                      i,
+                                      'childInsured'
+                                    )
+                                  "
+                                />
+                                <label class="form-check-label"
+                                  >Same As Primary Insured</label
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              *ngFor="
+                                let field of getSubsectionConfig(
+                                  getSubsectionConfig(
+                                    subsection,
+                                    'childInsured'
+                                  ),
+                                  'nominees'
+                                )?.formGroupTemplate
+                              "
+                              class="col-12 col-md-6 col-lg-4 ps-0"
+                            >
+                              <app-form-field
+                                [field]="field"
+                                [form]="nomineeGroup"
+                              ></app-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-auto mt-2 d-flex gap-2">
+                    <button
+                      type="button"
+                      class="btn btn-outline btn-md"
+                      (click)="
+                        onButtonClick({ name: 'addSpouseIndividual', index: i })
+                      "
+                    >
+                      <img
+                        src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
+                        alt="Add Spouse"
+                        class="btn-icon"
+                      />
+                      <span>Add Spouse</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-outline btn-md"
+                      (click)="
+                        onButtonClick({ name: 'addChildIndividual', index: i })
+                      "
+                    >
+                      <img
+                        src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
+                        alt="Add Child"
+                        class="btn-icon"
+                      />
+                      <span>Add Child</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -133,12 +433,15 @@
                         *ngIf="i > 0"
                         (click)="removeGroup(subsection, i)"
                       >
-                        <img src="/assets/icons/icon-remove.svg" alt="" />
+                        <img
+                          src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                          alt=""
+                        />
                         <span class="ms-1">Remove</span>
                       </div>
                     </div>
 
-                    <div class="row gy-3 gx-3 mb-3">
+                    <div class="row gy-3 gx-3 mb-3 ps-0">
                       <div
                         *ngFor="let field of subsection.formGroupTemplate"
                         class="col-12 col-md-4 col-lg-"
@@ -164,6 +467,8 @@
                             name: 'addMoreInsured',
                             label: 'Add More Insured',
                             buttonType: 'outline',
+                            iconPath:
+                              'https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg',
                           }"
                           [form]="form"
                           (buttonClick)="onButtonClick($event)"
@@ -179,7 +484,7 @@
                             'selfInsured'
                           )
                         "
-                        class="mt-3"
+                        class="mt-3 ps-0"
                       >
                         <div
                           *ngFor="
@@ -213,7 +518,10 @@
                                 )
                               "
                             >
-                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <img
+                                src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                                alt=""
+                              />
                               <span class="ms-1">Remove</span>
                             </div>
                           </div>
@@ -285,7 +593,7 @@
                             'spouseInsured'
                           )
                         "
-                        class="mt-3"
+                        class="mt-3 ps-0"
                       >
                         <div
                           *ngFor="
@@ -318,7 +626,10 @@
                                 )
                               "
                             >
-                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <img
+                                src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                                alt=""
+                              />
                               <span class="ms-1">Remove</span>
                             </div>
                           </div>
@@ -417,7 +728,7 @@
                             'childInsured'
                           )
                         "
-                        class="mt-3"
+                        class="mt-3 ps-0"
                       >
                         <div
                           *ngFor="
@@ -450,7 +761,10 @@
                                 )
                               "
                             >
-                              <img src="/assets/icons/icon-remove.svg" alt="" />
+                              <img
+                                src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                                alt=""
+                              />
                               <span class="ms-1">Remove</span>
                             </div>
                           </div>
@@ -553,7 +867,7 @@
                             (click)="onButtonClick({ name: 'addChild' })"
                           >
                             <img
-                              src="/assets/icons/icon-add.svg"
+                              src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
                               alt="Add Child"
                               class="btn-icon"
                             />
@@ -565,21 +879,133 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="subsection.name === 'departureFlights'">
+                <div
+                  *ngFor="
+                    let group of getFormArray(subsection.name).controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                  class="form-array-group mb-lg"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <p class="text-base text-primary font-semibold mb-2">
+                      Departure Flight {{ i + 1 }}
+                    </p>
+                    <div
+                      class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                      (click)="removeGroup(subsection, i)"
+                    >
+                      <img
+                        src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                        alt="remove"
+                      />
+                      <span class="ms-1">Remove</span>
+                    </div>
+                  </div>
 
+                  <div class="row gy-4 gx-5">
+                    <div
+                      *ngFor="let field of subsection.formGroupTemplate"
+                      class="col-12 col-md-6 col-lg-4 ps-0"
+                    >
+                      <app-form-field
+                        [field]="field"
+                        [form]="group"
+                      ></app-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 pe-4 mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline btn-md w-100"
+                    (click)="addGroup(subsection)"
+                  >
+                    <img
+                      [src]="subsection.iconPath"
+                      alt="Add Connecting Flight"
+                      class="btn-icon"
+                    />
+                    <span>{{ subsection.addButtonLabel }}</span>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="subsection.name === 'returnFlights'">
+                <div
+                  *ngFor="
+                    let group of getFormArray(subsection.name).controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                  class="form-array-group mb-lg"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <p class="text-base text-primary font-semibold mb-2">
+                      Return Flight {{ i + 1 }}
+                    </p>
+                    <div
+                      class="d-inline-flex align-items-center text-red-200 text-base cursor-pointer"
+                      (click)="removeGroup(subsection, i)"
+                    >
+                      <img
+                        src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-remove.svg"
+                        alt="remove"
+                      />
+                      <span class="ms-1">Remove</span>
+                    </div>
+                  </div>
+
+                  <div class="row gy-4 gx-5">
+                    <div
+                      *ngFor="let field of subsection.formGroupTemplate"
+                      class="col-12 col-md-6 col-lg-4 ps-0"
+                    >
+                      <app-form-field
+                        [field]="field"
+                        [form]="group"
+                      ></app-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 pe-4 mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline btn-md w-100"
+                    (click)="addGroup(subsection)"
+                  >
+                    <img
+                      [src]="subsection.iconPath"
+                      alt="Add Return Flight"
+                      class="btn-icon"
+                    />
+                    <span>{{ subsection.addButtonLabel }}</span>
+                  </button>
+                </div>
+              </div>
               <div
-                class="col-auto"
+                class="col-12 col-md-6 col-lg-4 ps-0"
                 *ngIf="
                   subsection.name !== 'families' &&
-                  subsection.name !== 'individuals'
+                  subsection.name !== 'individuals' &&
+                  subsection.name !== 'departureFlights' &&
+                  subsection.name !== 'returnFlights'
                 "
               >
                 <button
                   type="button"
-                  class="btn btn-outline btn-md"
+                  class="btn btn-outline btn-md w-100"
                   (click)="addGroup(subsection)"
                 >
                   <img
-                    src="/assets/icons/icon-add.svg"
+                    src="https://harshitagnihotrigemini.github.io/insillion-common-styles-fe-harshit/assets/images/icon-add.svg"
                     [alt]="subsection.addButtonLabel"
                     class="btn-icon"
                   />
@@ -591,15 +1017,24 @@
 
           <ng-template #standardSection>
             <p
-              class="text-base text-blue-secondary font-semibold mb-lg"
+              class="text-base text-blue-secondary font-semibold"
               *ngIf="subsection.title"
             >
               {{ subsection.title }}
             </p>
-            <div class="row gy-4 gx-5">
+            <div
+              [ngClass]="{
+                'risk-type-wrapper': subsection.title === 'Risk Type',
+                'row gy-4 gx-5': subsection.title !== 'Risk Type',
+              }"
+            >
               <div
                 *ngFor="let field of subsection.fields"
-                class="col-12 col-md-6 col-lg-4 ps-0"
+                [ngClass]="{
+                  'risk-option': subsection.title === 'Risk Type',
+                  'col-12 col-md-6 col-lg-4 ps-0':
+                    subsection.title !== 'Risk Type',
+                }"
               >
                 <app-form-field
                   [field]="field"

@@ -22,6 +22,7 @@ export class FormFieldComponent {
     field: any;
     action: 'increment' | 'decrement';
   }>();
+
   constructor(private fb: FormBuilder) {}
   get isInvalid(): boolean {
     const control = this.form.get(this.field.name);

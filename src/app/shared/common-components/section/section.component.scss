@@ -1,0 +1,20 @@
+:host ::ng-deep .policy-details-btn {
+  margin-left: auto;
+  margin-top: 50px;
+}
+.risk-type-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.risk-type-wrapper .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.risk-type-wrapper .col-12 {
+  flex: unset !important;
+  width: auto !important;
+}
