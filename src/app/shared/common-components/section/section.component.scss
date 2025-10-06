@@ -27,41 +27,36 @@
   border-radius: 8px;
 }
 
-.premium-row {
-  flex: 1 1 calc(50% - 1rem); // two columns
+.stepper-check {
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  border-bottom: 1px solid #eee;
-  padding: 0.5rem 0;
+  align-items: flex-start;
+  gap: 40px;
 }
-
-.premium-row:last-child {
-  border-bottom: none;
+.sign-css {
+  display: flex;
+  padding: 6px 8px;
+  align-items: center;
+  gap: 8px;
 }
-
-.premium-label {
-  font-weight: 500;
-  color: #444;
+:host ::ng-deep .counter-css {
+  display: flex;
+  padding: 4px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--Blue-Primary, #1362df);
+  background: #fff;
+  gap: 10px;
 }
-
-.premium-value {
-  font-weight: 600;
-  color: #000;
-}
-
-.total-premium .premium-value {
-  font-size: 16px;
-  color: #0066ff;
-}
-.sticky-next-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000; // ensures it stays above other elements
-}
-
-.sticky-next-btn .btn {
-  padding: 10px 20px;
-  border-radius: 8px;
+.stepper-class {
+  display: flex;
+  width: fit-content;
+  padding: 6px 8px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  background: var(--Blue-Tertiary, #f1f5fd);
+  height: 43px;
+  margin-top: -15px;
 }

@@ -6,36 +6,31 @@
       <form [formGroup]="form">
         <ng-container *ngFor="let section of config.sections">
           <app-section
-            *ngIf="section.type !== 'premiumBreakup'"
+            *ngIf="section.type !== 'premiumDetails'"
             [section]="section"
             [form]="form"
             (buttonClick)="handleButtonClick($event)"
             [personFields]="config.personFields || []"
             [nomineeFields]="config.nomineeFields || []"
-          >
-          </app-section>
+          ></app-section>
         </ng-container>
-
-        <app-section
-          *ngIf="showPremiumBreakup"
-          [section]="premiumBreakupSection"
-          [form]="form"
-          (buttonClick)="handleButtonClick($event)"
-          [personFields]="config.personFields || []"
-          [nomineeFields]="config.nomineeFields || []"
-        >
-        </app-section>
+        <ng-container *ngIf="showPremiumBreakup">
+          <app-section
+            [section]="premiumBreakupSection"
+            [form]="form"
+          ></app-section>
+        </ng-container>
       </form>
     </div>
   </div>
 
-  <div class="sticky-next-btn">
+  <div class="page-footer">
     <button
       type="button"
       class="btn btn-primary btn-md"
       (click)="onNextClick()"
     >
-      Get Premium
+      {{ buttonLabel }}
     </button>
   </div>
 </div>

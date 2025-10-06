@@ -66,6 +66,7 @@
       *ngSwitchCase="'button'"
       type="button"
       class="btn btn-outline btn-md w-100"
+      [disabled]="disabled"
       (click)="onButtonClick()"
     >
       <img
@@ -80,20 +81,59 @@
     <div *ngSwitchCase="'checkbox'">
       <div
         *ngIf="field.options?.length > 0; else singleCheckbox"
-        class="d-flex gap-3 flex-wrap"
+        class="gap-2 flex-column"
       >
-        <div *ngFor="let opt of field.options" class="form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [id]="field.name + '_' + opt.key"
-            [value]="opt.key"
-            (change)="onCheckboxChange($event, field)"
-            [checked]="form.get(field.name)?.value?.includes(opt.key)"
-          />
-          <label class="form-check-label" [for]="field.name + '_' + opt.key">
-            {{ opt.name || opt.value }}
-          </label>
+        <div
+          *ngFor="let opt of field.options"
+          class="d-flex align-items-center justify-content-between mb-2"
+          style="max-width: 350px"
+        >
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              class="form-check-input me-2"
+              [id]="field.name + '_' + opt.key"
+              [value]="opt.key"
+              (change)="onCheckboxChange($event, field)"
+              [checked]="form.get(field.name)?.value?.includes(opt.key)"
+            />
+            <label
+              class="form-check-label fw-medium"
+              [for]="field.name + '_' + opt.key"
+            >
+              {{ opt.name || opt.value }}
+            </label>
+          </div>
+
+          <div
+            class="d-flex align-items-center stepper-inline stepper-class"
+            *ngIf="
+              (opt.key === 'family' &&
+                form.get(field.name)?.value?.includes('family')) ||
+              (opt.key === 'individual' &&
+                form.get(field.name)?.value?.includes('individual'))
+            "
+          >
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm sign-css"
+              (click)="decrementStepper({ name: opt.key + 'Count' })"
+            >
+              −
+            </button>
+
+            <span class="counter-css">
+              {{ form.get(opt.key + "Count")?.value }}
+            </span>
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm sign-css"
+              (click)="incrementStepper({ name: opt.key + 'Count' })"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
 
@@ -112,7 +152,7 @@
       </ng-template>
     </div>
 
-    <div
+    <!-- <div
       *ngSwitchCase="'stepper'"
       class="stepper-class d-flex align-items-center gap-2"
     >
@@ -135,7 +175,7 @@
       >
         +
       </button>
-    </div>
+    </div> -->
   </ng-container>
 
   <div *ngIf="isInvalid" class="invalid-feedback d-block">

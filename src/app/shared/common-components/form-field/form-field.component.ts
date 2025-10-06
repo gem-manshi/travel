@@ -17,6 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class FormFieldComponent {
   @Input() field: any;
   @Input() form!: FormGroup;
+  @Input() disabled = false;
   @Output() buttonClick = new EventEmitter<any>();
   @Output() stepperChange = new EventEmitter<{
     field: any;
@@ -32,7 +33,9 @@ export class FormFieldComponent {
     return errors ? Object.keys(errors) : [];
   }
   onButtonClick(): void {
-    this.buttonClick.emit(this.field);
+    if (!this.disabled) {
+      this.buttonClick.emit(this.field);
+    }
   }
   onCheckboxChange(event: any, field: any): void {
     const control = this.form.get(field.name);

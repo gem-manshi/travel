@@ -34,43 +34,9 @@ export class TravelJourneyComponent {
   sectionState = new Map<string, boolean>();
   private offcanvasService = inject(NgbOffcanvas);
   showPremiumBreakup = false;
-  premiumBreakupSection = {
-    title: 'Premium Breakup',
-    type: 'premiumBreakup',
-    isCollapsible: true,
-    isExpandedByDefault: true,
-    subsections: [
-      {
-        title: 'Premium Breakup',
-        fields: [
-          {
-            type: 'label',
-            name: 'premiumExcludingTerrorism',
-            label: 'Premium Excluding Terrorism',
-            value: '₹ 4,000.00',
-          },
-          {
-            type: 'label',
-            name: 'terrorismPremium',
-            label: 'Terrorism Premium',
-            value: '₹ 115.50',
-          },
-          {
-            type: 'label',
-            name: 'grossPremium',
-            label: 'Gross Premium',
-            value: '₹ 4,115.50',
-          },
-          {
-            type: 'label',
-            name: 'igst',
-            label: 'IGST 18%',
-            value: '₹ 740.79',
-          },
-        ],
-      },
-    ],
-  };
+  premiumBreakupSection: any;
+  buttonLabel = 'Get Premium';
+  totalPremium = 4856;
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -161,8 +127,38 @@ export class TravelJourneyComponent {
       state: { isProposal: false },
     });
   }
+  onNextClick(): void {
+    if (this.buttonLabel === 'Get Premium') {
+      this.showPremiumBreakup = true;
 
-  onNextClick() {
-    this.showPremiumBreakup = true; // 👈 show it on next click
+      const breakupValues = {
+        premiumExcludingTerrorism: 1200,
+        terrorismPremium: 50,
+        grossPremium: 1250,
+        igst: 225,
+        totalPremium: 1475,
+      };
+
+      this.premiumBreakupSection = this.config?.sections?.find(
+        (s: any) => s.type === 'premiumDetails',
+      );
+
+      if (this.premiumBreakupSection?.subsections?.length) {
+        this.premiumBreakupSection.subsections[0].fields.forEach(
+          (field: any) => {
+            const key = field.name as keyof typeof breakupValues;
+            field.value = breakupValues[key] ?? '';
+          },
+        );
+      }
+
+      if (this.form) {
+        this.form.patchValue(breakupValues, { emitEvent: false });
+      }
+
+      this.buttonLabel = 'Next';
+    } else {
+      this.router.navigate(['/travel-summary']);
+    }
   }
 }

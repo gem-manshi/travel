@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PremiumBreakupComponent {
   @Input() title: string = 'Premium Breakup';
+  totalPremium = 4856;
   @Input() breakupData: { label: string; value: string | number }[] = [];
 }

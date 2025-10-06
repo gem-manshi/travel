@@ -1,213 +1,175 @@
 {
-  "title": "Contractor Plant and Machinery",
+  "title": "Policy Summary",
   "breadCrumbs": [
     { "title": "Dashboard", "link": "/dashboard" },
-    { "title": "Engineering", "link": "/commercial-lines" },
+    { "title": "Travel", "link": "/travel" },
     { "title": "Policy Summary", "link": "/policy-summary", "isActive": true }
   ],
   "sections": [
     {
-      "title": "Quotation",
+      "title": "Base Details",
       "subsections": [
         {
-          "title": "Contractor Plant and Machinery Insurance",
           "fields": [
-            { "label": "Intermediary", "value": "AG20227" },
-            { "label": "Proposition Selection", "value": "Product" },
-            { "label": "Transaction Type", "value": "New" },
-            { "label": "Customer First Name", "value": "Nikhil" },
-            { "label": "Proposer Email", "value": "nikhil@gmail.com" },
-            { "label": "Policy Start Date", "value": "11-09-2025" },
-            { "label": "Policy End Date", "value": "10-09-2026" },
-            { "label": "SEZ Previlege", "value": "Apply-GST" },
-            { "label": "Lead Code", "value": "-" },
-            { "label": "Product", "value": "CPM Base Cover" }
-          ]
-        },
-        {
-          "title": "Branch Details",
-          "fields": [
-            { "label": "Branch", "value": "CP Delhi" },
-            { "label": "Branch State", "value": "Delhi" },
-            { "label": "Branch GST No.", "value": "07AABCR7106G1ZL" }
+            {
+              "label": "Master Policy Cover Start Date",
+              "value": "01/09/2025"
+            },
+            { "label": "Master Policy Cover End Date", "value": "30/09/2025" },
+            { "label": "Duration", "value": "30 Days" },
+            { "label": "Plan", "value": "Comprehensive Plan" },
+            { "label": "Proposition", "value": "By Air" },
+            { "label": "Place of Origin", "value": "New Delhi (India)" },
+            {
+              "label": "Place of Destination",
+              "value": "London, United Kingdom"
+            },
+            { "label": "Partner Application Number", "value": "PA-4521893" },
+            { "label": "Party Code", "value": "PTY-9021" }
           ]
         }
       ]
     },
     {
-      "title": "Risk Details",
+      "title": "Departure Details",
       "subsections": [
         {
-          "title": "Floater Details",
           "fields": [
-            { "label": "Floater", "value": "Yes" },
             {
-              "label": "Floater Coverage Within",
-              "value": "Anywhere in India"
+              "label": "Journey Start from",
+              "value": "IGI Airport, New Delhi (DEL)"
             },
             {
-              "label": "Project in Which Machinery is Operated",
-              "value": "Anywhere in India"
-            }
-          ]
-        },
-        {
-          "title": "Machinery Details",
-          "type": "form-array",
-          "headers": [
-            "Location",
-            "Machinery",
-            "Description",
-            "Make",
-            "Model",
-            "Serial/Chassis No.",
-            "Year of Manufacturing"
-          ],
-          "rows": [
-            {
-              "location": "PAN India",
-              "machinery": "Chain Blocks & Pulley Blocks",
-              "description": "-",
-              "make": "Tata Heavy Industries",
-              "model": "TX-450 Chain Block",
-              "serialNo": "0964537",
-              "year": "2025"
-            }
-          ]
-        },
-        {
-          "title": "Policy Addons",
-          "fields": [
-            { "label": "Earthquake Required", "value": "Yes" },
-            { "label": "Terrorism Cover", "value": "Yes" }
-          ]
-        },
-        {
-          "title": "Coverage Options",
-          "fields": [
-            { "label": "Third Party Liability", "value": "-" },
-            { "label": "Customize SI", "value": "25,00,000" },
-            { "label": "Max SI Limit", "value": "50,00,000" },
-            { "label": "AOA ADY", "value": "1:2" }
-          ]
-        },
-        {
-          "title": "Referral Details",
-          "fields": [
-            {
-              "label": "Underwriter Referral Needed for This Quote?",
-              "value": "No"
-            }
+              "label": "Journey Destination / Halt",
+              "value": "Heathrow Airport, London (LHR)"
+            },
+            { "label": "Flight Date", "value": "01/09/2025" },
+            { "label": "Flight Number", "value": "AI 111" },
+            { "label": "Flight Name", "value": "Air India" },
+            { "label": "PNR Number", "value": "XY79Z3" }
           ]
         }
       ]
     },
     {
-      "title": "Proposal",
+      "title": "Return Journey",
       "subsections": [
         {
-          "title": "Policy Details",
-          "fields": [
-            { "label": "Policy Start Date", "value": "08-09-2025" },
-            { "label": "Policy End Date", "value": "07-09-2026" },
-            { "label": "Business of Proposer", "value": "-" }
-          ]
-        },
-        {
-          "title": "Proposal Questionnaire",
           "fields": [
             {
-              "label": "Do you want to answer the proposal questionnaire",
-              "value": "-"
-            }
-          ]
-        },
-        {
-          "title": "Hypothecation Details",
-          "fields": [{ "label": "Hypothecation", "value": "No" }]
-        },
-        {
-          "title": "Co-Insurance Details",
-          "fields": [
-            { "label": "RSG Leader / Member", "value": "No Co-Insurance" }
-          ]
-        },
-        {
-          "title": "Broker Details",
-          "fields": [
-            { "label": "Agent / Broker Code", "value": "AG020227" },
-            { "label": "Broker Type", "value": "Entity" },
-            { "label": "Agent / Broker Name", "value": "OA503184_NIKHIL" },
-            { "label": "QA Code", "value": "OA503184" },
-            { "label": "Share%", "value": "100" },
-            { "label": "Commission On", "value": "Overall Premium" },
-            { "label": "Broker/Agent Commission", "value": "15" }
-          ]
-        },
-        {
-          "title": "Proposal Branch Details",
-          "fields": [
-            { "label": "SEZ Tax Exemption Status", "value": "Apply-GST" },
-            { "label": "Branch State", "value": "CP Delhi" },
-            { "label": "Branch Code", "value": "N2" }
-          ]
-        },
-        {
-          "title": "Channel",
-          "fields": [
-            { "label": "Channel", "value": "Commercial" },
-            { "label": "Sub Channel", "value": "Mid-Corporate" },
-            { "label": "Sales Rep Code", "value": "HR005144" },
-            { "label": "TUW Code", "value": "TU002741" },
-            { "label": "UW Code", "value": "UW002741" },
-            { "label": "Sales Rep Name", "value": "HR005144_TANUJ" },
-            { "label": "Trading UIW Name", "value": "TU002741_SURAJ" },
-            { "label": "Approving UW Name", "value": "UW002741_ARYAN" },
-            { "label": "SP License Code", "value": "-" }
+              "label": "Journey Start from",
+              "value": "Heathrow Airport, London (LHR)"
+            },
+            {
+              "label": "Journey Destination / Halt",
+              "value": "IGI Airport, New Delhi (DEL)"
+            },
+            { "label": "Flight Date", "value": "29/09/2025" },
+            { "label": "Flight Number", "value": "AI 112" },
+            { "label": "Flight Name", "value": "Air India" },
+            { "label": "PNR Number", "value": "Z4X9K2" }
           ]
         }
       ]
     },
     {
-      "title": "Attachments",
-      "componentType": "attachments-review",
-      "data": [
+      "title": "Insured Details",
+      "subsections": [
         {
-          "name": "CKYC Document",
-          "id": "A202500000028022",
-          "actionLabel": "View"
+          "fields": [{ "label": "Risk Type", "value": "Family (1)" }]
         },
         {
-          "name": "CKYC Document",
-          "id": "A2025000000230623",
-          "actionLabel": "View"
+          "title": "Family Details 1",
+          "fields": []
         },
         {
-          "name": "CKYC Document",
-          "id": "A20250000004562018",
-          "actionLabel": "View"
+          "title": "Self Insured 1",
+          "fields": [
+            { "label": "Employee / Unique ID", "value": "EMP4521" },
+            { "label": "First Name", "value": "Rohan" },
+            { "label": "Last Name", "value": "Mehta" },
+            { "label": "Email ID", "value": "rohan.mehta@gmail.com" },
+            { "label": "Date of Birth", "value": "15/08/1970" },
+            { "label": "Gender", "value": "Male" },
+            { "label": "Mobile Number", "value": "+91 9876543210" },
+            { "label": "Passport Number", "value": "N1234567" },
+            { "label": "PAN Number", "value": "ACRPM1234F" },
+            { "label": "Pincode", "value": "110001" },
+            {
+              "label": "Address 1",
+              "value": "23, Green Park Main Road, Delhi"
+            },
+            { "label": "Address 2", "value": "-" },
+            { "label": "Address 3", "value": "-" }
+          ]
+        },
+        {
+          "title": "Nominee Details (Self)",
+          "fields": [
+            { "label": "Name", "value": "Ananya Mehta" },
+            { "label": "Date of Birth", "value": "20/11/1950" },
+            { "label": "Gender", "value": "Female" },
+            { "label": "Relationship with Insured Person", "value": "Mother" },
+            { "label": "Address", "value": "23, Green Park Main Road, Delhi" }
+          ]
+        },
+        {
+          "title": "Spouse Details 1",
+          "fields": [
+            { "label": "Employee / Unique ID", "value": "EMP56789" },
+            { "label": "First Name", "value": "Anita" },
+            { "label": "Last Name", "value": "Mehta" },
+            { "label": "Email ID", "value": "anita.mehta@gmail.com" },
+            { "label": "Date of Birth", "value": "12/03/1971" },
+            { "label": "Gender", "value": "Female" },
+            { "label": "Mobile Number", "value": "+91 9876545430" },
+            { "label": "Passport Number", "value": "M1234567" },
+            { "label": "PAN Number", "value": "ASDFP1234K" },
+            { "label": "Pincode", "value": "560001" },
+            { "label": "Address 1", "value": "45, MG Road, Bangalore" },
+            { "label": "Address 2", "value": "-" },
+            { "label": "Address 3", "value": "-" }
+          ]
+        },
+        {
+          "title": "Nominee Details (Spouse)",
+          "fields": [
+            { "label": "Name", "value": "Rohit Mehta" },
+            { "label": "Date of Birth", "value": "10/08/1998" },
+            { "label": "Gender", "value": "Male" },
+            { "label": "Relationship with Insured Person", "value": "Son" },
+            { "label": "Address", "value": "45, MG Road, Bangalore" }
+          ]
+        },
+        {
+          "title": "Child Details 1",
+          "fields": [
+            { "label": "Employee / Unique ID", "value": "EMP56790" },
+            { "label": "First Name", "value": "Sahil" },
+            { "label": "Last Name", "value": "Mehta" },
+            { "label": "Email ID", "value": "sahil.mehta@gmail.com" },
+            { "label": "Date of Birth", "value": "10/08/1991" },
+            { "label": "Gender", "value": "Male" },
+            { "label": "Mobile Number", "value": "+91 7523187527" },
+            { "label": "Passport Number", "value": "P9876543" },
+            { "label": "PAN Number", "value": "BBDFP1234K" },
+            { "label": "Pincode", "value": "560001" },
+            { "label": "Address 1", "value": "45, MG Road, Bangalore" },
+            { "label": "Address 2", "value": "-" },
+            { "label": "Address 3", "value": "-" }
+          ]
+        },
+        {
+          "title": "Nominee Details (Child)",
+          "fields": [
+            { "label": "Name", "value": "Anita Mehta" },
+            { "label": "Date of Birth", "value": "12/03/1971" },
+            { "label": "Gender", "value": "Female" },
+            { "label": "Relationship with Insured Person", "value": "Mother" },
+            { "label": "Address", "value": "45, MG Road, Bangalore" }
+          ]
         }
       ]
     }
-  ],
-  "modals": {
-    "premiumSummary": {
-      "title": "Premium Summary",
-      "items": [
-        { "label": "Premium Excluding Terrorism", "value": "₹ 4,000.00" },
-        { "label": "Terrorism Premium", "value": "₹ 115.50" },
-        { "label": "Gross Premium", "value": "₹ 4,115.50" },
-        { "label": "IGST 18%:", "value": "₹ 740.79" }
-      ],
-      "total": {
-        "label": "Total Premium",
-        "value": "₹ 4,856.00"
-      }
-    }
-  },
-  "ckycAction": {
-    "label": "C-KYC Verification",
-    "type": "outline",
-    "action": "ckycOffCanvas"
-  }
+  ]
 }
